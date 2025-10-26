@@ -16,6 +16,51 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
+            transition: background 0.3s ease;
+        }
+
+        body.dark-mode {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+
+        body.dark-mode .main-content {
+            background: #0f3460;
+            color: #e8e8e8;
+        }
+
+        body.dark-mode .resource-card {
+            background: #16213e;
+            color: #e8e8e8;
+        }
+
+        body.dark-mode .resource-card h3 {
+            color: #bb86fc;
+        }
+
+        body.dark-mode .resource-card p {
+            color: #b8b8b8;
+        }
+
+        body.dark-mode .category-bar {
+            background: #0f3460;
+        }
+
+        body.dark-mode .category-bar h2 {
+            color: #bb86fc;
+        }
+
+        body.dark-mode .search-box input {
+            background: #16213e;
+            color: #e8e8e8;
+            border-color: #bb86fc;
+        }
+
+        body.dark-mode .category-item {
+            background: linear-gradient(135deg, #533483 0%, #1a1a2e 100%);
+        }
+
+        body.dark-mode .category-title {
+            color: #bb86fc;
         }
 
         .container {
@@ -222,6 +267,33 @@
             text-align: center;
         }
 
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            transition: transform 0.2s, background 0.3s;
+            z-index: 1001;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        body.dark-mode .theme-toggle {
+            background: #16213e;
+        }
+
         @media (max-width: 768px) {
             .container {
                 flex-direction: column;
@@ -234,6 +306,7 @@
     </style>
 </head>
 <body>
+    <button class="theme-toggle" id="themeToggle">🌙</button>
     <div class="overlay" id="overlay"></div>
     
     <div class="container">
@@ -722,6 +795,26 @@
         const resourcesGrid = document.getElementById('resourcesGrid');
         const categoryTitle = document.getElementById('categoryTitle');
         const categorySearch = document.getElementById('categorySearch');
+        const themeToggle = document.getElementById('themeToggle');
+
+        // Theme toggle functionality
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            if (document.body.classList.contains('dark-mode')) {
+                themeToggle.textContent = '☀️';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeToggle.textContent = '🌙';
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            themeToggle.textContent = '☀️';
+        }
 
         menuBtn.addEventListener('click', () => {
             categoryBar.classList.toggle('active');
