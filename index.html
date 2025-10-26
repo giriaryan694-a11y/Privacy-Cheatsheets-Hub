@@ -83,6 +83,28 @@
             font-size: 24px;
         }
 
+        .search-box {
+            margin-bottom: 20px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .search-box input:focus {
+            border-color: #764ba2;
+        }
+
+        .category-item.hidden {
+            display: none;
+        }
+
         .category-item {
             padding: 15px;
             margin: 10px 0;
@@ -225,6 +247,9 @@
 
         <div class="category-bar" id="categoryBar">
             <h2>Categories</h2>
+            <div class="search-box">
+                <input type="text" id="categorySearch" placeholder="Search categories...">
+            </div>
             <div class="category-item" data-category="all">All Resources</div>
             <div class="category-item" data-category="vpn">VPN</div>
             <div class="category-item" data-category="ai">AI Privacy</div>
@@ -240,6 +265,8 @@
             <div class="category-item" data-category="email-masking">Email Masking</div>
             <div class="category-item" data-category="disposable">Disposable Emails</div>
             <div class="category-item" data-category="bios">BIOS/Firmware</div>
+            <div class="category-item" data-category="bank">Private Banking</div>
+            <div class="category-item" data-category="crypto">Cryptocurrencies</div>
             <div class="category-item" data-category="os">Operating Systems</div>
         </div>
 
@@ -529,6 +556,86 @@
                     <a href="https://github.com/system76/firmware-open" target="_blank">Visit System76 Firmware →</a>
                 </div>
 
+                <!-- Private Banking Resources -->
+                <div class="resource-card" data-category="bank">
+                    <h3>Pictet Group</h3>
+                    <p>Swiss private bank with over 200 years of tradition in wealth management and asset protection.</p>
+                    <a href="https://www.pictet.com" target="_blank">Visit Pictet Group →</a>
+                </div>
+
+                <div class="resource-card" data-category="bank">
+                    <h3>Lombard Odier</h3>
+                    <p>Independent Swiss private bank offering wealth and asset management services since 1796.</p>
+                    <a href="https://www.lombardodier.com" target="_blank">Visit Lombard Odier →</a>
+                </div>
+
+                <div class="resource-card" data-category="bank">
+                    <h3>Julius Baer</h3>
+                    <p>Leading Swiss wealth management group focused on private banking and asset management.</p>
+                    <a href="https://www.juliusbaer.com" target="_blank">Visit Julius Baer →</a>
+                </div>
+
+                <div class="resource-card" data-category="bank">
+                    <h3>Vontobel</h3>
+                    <p>Swiss private bank specializing in wealth management, investment banking, and asset management.</p>
+                    <a href="https://www.vontobel.com" target="_blank">Visit Vontobel →</a>
+                </div>
+
+                <div class="resource-card" data-category="bank">
+                    <h3>Zürcher Kantonalbank (ZKB)</h3>
+                    <p>Cantonal bank of Zürich offering comprehensive banking services with strong regional presence.</p>
+                    <a href="https://www.zkb.ch" target="_blank">Visit ZKB →</a>
+                </div>
+
+                <div class="resource-card" data-category="bank">
+                    <h3>Banque Cantonale Vaudoise (BCV)</h3>
+                    <p>Cantonal bank serving the Vaud region with full-service banking solutions.</p>
+                    <a href="https://www.bcv.ch" target="_blank">Visit BCV →</a>
+                </div>
+
+                <div class="resource-card" data-category="bank">
+                    <h3>PostFinance</h3>
+                    <p>Swiss Post's financial services provider offering secure banking for individuals and businesses.</p>
+                    <a href="https://www.postfinance.ch" target="_blank">Visit PostFinance →</a>
+                </div>
+
+                <div class="resource-card" data-category="bank">
+                    <h3>Migros Bank</h3>
+                    <p>Retail bank from the Migros Group providing accessible banking services across Switzerland.</p>
+                    <a href="https://www.migrosbank.ch" target="_blank">Visit Migros Bank →</a>
+                </div>
+
+                <!-- Cryptocurrency Resources -->
+                <div class="resource-card" data-category="crypto">
+                    <h3>Monero (XMR)</h3>
+                    <p>Mandatory privacy for all transactions using Ring Signatures, Stealth Addresses, and RingCT. Highly resistant to blockchain analysis with built-in fungibility.</p>
+                    <a href="https://www.getmonero.org" target="_blank">Visit Monero →</a>
+                </div>
+
+                <div class="resource-card" data-category="crypto">
+                    <h3>Zcash (ZEC)</h3>
+                    <p>Optional privacy using zk-SNARKs for shielded transactions. Mathematically provable technology allowing selective privacy for regulatory compliance.</p>
+                    <a href="https://z.cash" target="_blank">Visit Zcash →</a>
+                </div>
+
+                <div class="resource-card" data-category="crypto">
+                    <h3>Firo (FIRO)</h3>
+                    <p>Uses Lelantus Spark protocol to burn and redeem coins with no transaction history. Includes Dandelion++ protocol to hide IP addresses.</p>
+                    <a href="https://firo.org" target="_blank">Visit Firo →</a>
+                </div>
+
+                <div class="resource-card" data-category="crypto">
+                    <h3>Secret Network (SCRT)</h3>
+                    <p>Privacy blockchain with secret smart contracts for private dApps. Extends privacy beyond transactions to encrypted data and applications.</p>
+                    <a href="https://scrt.network" target="_blank">Visit Secret Network →</a>
+                </div>
+
+                <div class="resource-card" data-category="crypto">
+                    <h3>Dash (DASH)</h3>
+                    <p>Fast digital cash with optional PrivateSend feature using CoinJoin mixing. User-friendly for everyday payments with optional privacy.</p>
+                    <a href="https://www.dash.org/" target="_blank">Visit Dash →</a>
+                </div>
+
                 <!-- Email Masking Resources -->
                 <div class="resource-card" data-category="email-masking">
                     <h3>DuckDuckGo Email Protection</h3>
@@ -614,6 +721,7 @@
         const categoryItems = document.querySelectorAll('.category-item');
         const resourcesGrid = document.getElementById('resourcesGrid');
         const categoryTitle = document.getElementById('categoryTitle');
+        const categorySearch = document.getElementById('categorySearch');
 
         menuBtn.addEventListener('click', () => {
             categoryBar.classList.toggle('active');
@@ -623,6 +731,20 @@
         overlay.addEventListener('click', () => {
             categoryBar.classList.remove('active');
             overlay.classList.remove('active');
+        });
+
+        // Category search functionality
+        categorySearch.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            
+            categoryItems.forEach(item => {
+                const categoryText = item.textContent.toLowerCase();
+                if (categoryText.includes(searchTerm)) {
+                    item.classList.remove('hidden');
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
         });
 
         categoryItems.forEach(item => {
