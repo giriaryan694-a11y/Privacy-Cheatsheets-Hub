@@ -56,6 +56,7 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 30px;
+            position: relative;
         }
 
         .logo {
@@ -411,6 +412,8 @@
             gap: 5px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             transition: var(--transition);
+            position: relative;
+            z-index: 1002;
         }
 
         .mobile-menu-btn span {
@@ -496,6 +499,7 @@
                 z-index: 999;
                 border-radius: 0;
                 overflow-y: auto;
+                padding-top: 80px;
             }
             
             .sidebar.active {
@@ -504,6 +508,13 @@
             
             .mobile-overlay.active {
                 display: block;
+            }
+            
+            .theme-toggle {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                z-index: 1001;
             }
         }
 
@@ -522,6 +533,14 @@
             
             .category-title {
                 font-size: 24px;
+            }
+            
+            .logo-text h1 {
+                font-size: 20px;
+            }
+            
+            .logo-text p {
+                font-size: 12px;
             }
         }
     </style>
@@ -682,6 +701,22 @@
                     </a>
                 </div>
 
+                <div class="resource-card" data-category="vpn">
+                    <h3><i class="fas fa-network-wired"></i> NordVPN</h3>
+                    <p>Feature-rich VPN with double encryption and onion over VPN support.</p>
+                    <a href="https://nordvpn.com" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit NordVPN
+                    </a>
+                </div>
+
+                <div class="resource-card" data-category="vpn">
+                    <h3><i class="fas fa-user-shield"></i> ExpressVPN</h3>
+                    <p>High-speed VPN with TrustedServer technology and network lock kill switch.</p>
+                    <a href="https://expressvpn.com" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit ExpressVPN
+                    </a>
+                </div>
+
                 <!-- AI Resources -->
                 <div class="resource-card" data-category="ai">
                     <h3><i class="fas fa-robot"></i> Privacy Guides - AI</h3>
@@ -817,7 +852,7 @@
                 <!-- Encryption Resources -->
                 <div class="resource-card" data-category="encryption">
                     <h3><i class="fas fa-file-lock"></i> ARYCRYPT</h3>
-                    <p>File encryption web app that lets you encrypt any file into .ary format and decrypt it back with a password. Perfect for secure file sharing or just playing with crypto!</p>
+                    <p>File encryption web app that lets you encrypt any file into .ary format and decrypt it back with a password.</p>
                     <a href="https://giriaryan694-a11y.github.io/ARYCRYPT/" target="_blank">
                         <i class="fas fa-external-link-alt"></i> Visit ARYCRYPT
                     </a>
@@ -828,6 +863,14 @@
                     <p>Secure, password-based text encryption and decryption tool for protecting sensitive messages.</p>
                     <a href="https://giriaryan694-a11y.github.io/ZeroTrustText/" target="_blank">
                         <i class="fas fa-external-link-alt"></i> Visit ZeroTrustText
+                    </a>
+                </div>
+
+                <div class="resource-card" data-category="encryption">
+                    <h3><i class="fas fa-lock"></i> VeraCrypt</h3>
+                    <p>Free open-source disk encryption software for Windows, macOS, and Linux.</p>
+                    <a href="https://www.veracrypt.fr/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit VeraCrypt
                     </a>
                 </div>
 
@@ -842,7 +885,7 @@
 
                 <div class="resource-card" data-category="secure-deletion">
                     <h3><i class="fas fa-trash-alt"></i> Eraser</h3>
-                    <p>Advanced security tool for Windows that completely removes sensitive data by overwriting multiple times. Free and open-source.</p>
+                    <p>Advanced security tool for Windows that completely removes sensitive data by overwriting multiple times.</p>
                     <a href="https://eraser.heidi.ie/" target="_blank">
                         <i class="fas fa-external-link-alt"></i> Visit Eraser
                     </a>
@@ -902,6 +945,14 @@
                     <p>End-to-end encrypted password manager from Proton with secure sharing.</p>
                     <a href="https://proton.me/pass" target="_blank">
                         <i class="fas fa-external-link-alt"></i> Visit Proton Pass
+                    </a>
+                </div>
+
+                <div class="resource-card" data-category="password">
+                    <h3><i class="fas fa-shield-alt"></i> 1Password</h3>
+                    <p>Password manager with travel mode and watchtower security features.</p>
+                    <a href="https://1password.com" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit 1Password
                     </a>
                 </div>
 
@@ -988,153 +1039,6 @@
                     </a>
                 </div>
 
-                <!-- BIOS/Firmware Resources -->
-                <div class="resource-card" data-category="bios">
-                    <h3><i class="fas fa-microchip"></i> Coreboot</h3>
-                    <p>Fast, lightweight open-source firmware with excellent boot speed and enhanced security. Pros: Verified boot, broad hardware support. Cons: Often requires proprietary blobs for modern hardware.</p>
-                    <a href="https://www.coreboot.org/" target="_blank">
-                        <i class="fas fa-external-link-alt"></i> Visit Coreboot
-                    </a>
-                </div>
-
-                <div class="resource-card" data-category="bios">
-                    <h3><i class="fas fa-freedom"></i> Libreboot</h3>
-                    <p>Coreboot variant with strict free software focus, removing all proprietary blobs. Pros: Maximum software freedom, no backdoors. Cons: Limited to older hardware, smaller device support.</p>
-                    <a href="https://libreboot.org/" target="_blank">
-                        <i class="fas fa-external-link-alt"></i> Visit Libreboot
-                    </a>
-                </div>
-
-                <div class="resource-card" data-category="bios">
-                    <h3><i class="fas fa-head-side"></i> Heads</h3>
-                    <p>Security-focused firmware using Coreboot as base with TPM and USB security key support. Pros: Trusted boot environment. Cons: Complex setup, requires compatible hardware, best with QubesOS.</p>
-                    <a href="https://osresearch.net/" target="_blank">
-                        <i class="fas fa-external-link-alt"></i> Visit Heads
-                    </a>
-                </div>
-
-                <div class="resource-card" data-category="bios">
-                    <h3><i class="fas fa-rocket"></i> Dasharo</h3>
-                    <p>Coreboot distribution for modern platforms with focus on security and long-term maintenance. Pros: Modern device support, vendor-backed. Cons: Primarily for new purpose-built hardware.</p>
-                    <a href="https://dasharo.com/" target="_blank">
-                        <i class="fas fa-external-link-alt"></i> Visit Dasharo
-                    </a>
-                </div>
-
-                <div class="resource-card" data-category="bios">
-                    <h3><i class="fas fa-laptop"></i> System76 Open Firmware</h3>
-                    <p>Coreboot distribution for System76 hardware with excellent integration. Pros: Perfect compatibility with System76 devices. Cons: Only for System76 hardware.</p>
-                    <a href="https://github.com/system76/firmware-open" target="_blank">
-                        <i class="fas fa-external-link-alt"></i> Visit System76 Firmware
-                    </a>
-                </div>
-
-                <!-- Private Banking Resources -->
-                <div class="resource-card" data-category="bank">
-                    <h3><i class="fas fa-university"></i> Pictet Group</h3>
-                    <p>Swiss private bank with over 200 years of tradition in wealth management and asset protection.</p>
-                    <a href="https://www.pictet.com" target="_blank">
-                        <i class="fas fa-external-link-alt"></i> Visit Pictet Group
-                    </a>
-                </div>
-
-                <div class="resource-card" data-category="bank">
-                    <h3><i class="fas fa-landmark"></i> Lombard Odier</h3>
-                    <p>Independent Swiss private bank offering wealth and asset management services since 1796.</p>
-                    <a href="https://www.lombardodier.com" target="_blank">
-                        <i class="fas fa-external-link-alt"></i> Visit Lombard Odier
-                    </a>
-                </div>
-
-                <div class="resource-card" data-category="bank">
-                    <h3><i class="fas fa-building"></i> Julius Baer</h3>
-                    <p>Leading Swiss wealth management group focused on private banking and asset management.</p>
-                    <a href="https://www.juliusbaer.com" target="_blank">
-                        <i class="fas fa-external-link-alt"></i> Visit Julius Baer
-                    </a>
-                </div>
-
-                <div class="resource-card" data-category="bank">
-                    <h3><i class="fas fa-piggy-bank"></i> Vontobel</h3>
-                    <p>Swiss private bank specializing in wealth management, investment banking, and asset management.</p>
-                    <a href="https://www.vontobel.com" target="_blank">
-                        <i class="fas fa-external-link-alt"></i> Visit Vontobel
-                    </a>
-                </div>
-
-                <div class="resource-card" data-category="bank">
-                    <h3><i class="fas fa-bank"></i> Zürcher Kantonalbank (ZKB)</h3>
-                    <p>Cantonal bank of Zürich offering comprehensive banking services with strong regional presence.</p>
-                    <a href="https://www.zkb.ch" target="_blank">
-                        <i class="fas fa-external-link-alt"></i> Visit ZKB
-                    </a>
-                </div>
-
-                <div class="resource-card" data-category="bank">
-                    <h3><i class="fas fa-building-columns"></i> Banque Cantonale Vaudoise (BCV)</h3>
-                    <p>Cantonal bank serving the Vaud region with full-service banking solutions.</p>
-                    <a href="https://www.bcv.ch" target="_blank">
-                        <i class="fas fa-external-link-alt"></i> Visit BCV
-                    </a>
-                </div>
-
-                <div class="resource-card" data-category="bank">
-                    <h3><i class="fas fa-mail-bulk"></i> PostFinance</h3>
-                    <p>Swiss Post's financial services provider offering secure banking for individuals and businesses.</p>
-                    <a href="https://www.postfinance.ch" target="_blank">
-                        <i class="fas fa-external-link-alt"></i> Visit PostFinance
-                    </a>
-                </div>
-
-                <div class="resource-card" data-category="bank">
-                    <h3><i class="fas fa-store"></i> Migros Bank</h3>
-                    <p>Retail bank from the Migros Group providing accessible banking services across Switzerland.</p>
-                    <a href="https://www.migrosbank.ch" target="_blank">
-                        <i class="fas fa-external-link-alt"></i> Visit Migros Bank
-                    </a>
-                </div>
-
-                <!-- Cryptocurrency Resources -->
-                <div class="resource-card" data-category="crypto">
-                    <h3><i class="fas fa-coins"></i> Monero (XMR)</h3>
-                    <p>Mandatory privacy for all transactions using Ring Signatures, Stealth Addresses, and RingCT. Highly resistant to blockchain analysis with built-in fungibility.</p>
-                    <a href="https://www.getmonero.org" target="_blank">
-                        <i class="fas fa-external-link-alt"></i> Visit Monero
-                    </a>
-                </div>
-
-                <div class="resource-card" data-category="crypto">
-                    <h3><i class="fas fa-shield-alt"></i> Zcash (ZEC)</h3>
-                    <p>Optional privacy using zk-SNARKs for shielded transactions. Mathematically provable technology allowing selective privacy for regulatory compliance.</p>
-                    <a href="https://z.cash" target="_blank">
-                        <i class="fas fa-external-link-alt"></i> Visit Zcash
-                    </a>
-                </div>
-
-                <div class="resource-card" data-category="crypto">
-                    <h3><i class="fas fa-bolt"></i> Firo (FIRO)</h3>
-                    <p>Uses Lelantus Spark protocol to burn and redeem coins with no transaction history. Includes Dandelion++ protocol to hide IP addresses.</p>
-                    <a href="https://firo.org" target="_blank">
-                        <i class="fas fa-external-link-alt"></i> Visit Firo
-                    </a>
-                </div>
-
-                <div class="resource-card" data-category="crypto">
-                    <h3><i class="fas fa-user-secret"></i> Secret Network (SCRT)</h3>
-                    <p>Privacy blockchain with secret smart contracts for private dApps. Extends privacy beyond transactions to encrypted data and applications.</p>
-                    <a href="https://scrt.network" target="_blank">
-                        <i class="fas fa-external-link-alt"></i> Visit Secret Network
-                    </a>
-                </div>
-
-                <div class="resource-card" data-category="crypto">
-                    <h3><i class="fas fa-rocket"></i> Dash (DASH)</h3>
-                    <p>Fast digital cash with optional PrivateSend feature using CoinJoin mixing. User-friendly for everyday payments with optional privacy.</p>
-                    <a href="https://www.dash.org/" target="_blank">
-                        <i class="fas fa-external-link-alt"></i> Visit Dash
-                    </a>
-                </div>
-
                 <!-- Email Masking Resources -->
                 <div class="resource-card" data-category="email-masking">
                     <h3><i class="fas fa-duck"></i> DuckDuckGo Email Protection</h3>
@@ -1165,6 +1069,14 @@
                     <p>Anonymous email forwarding service with unlimited aliases.</p>
                     <a href="https://addy.io/" target="_blank">
                         <i class="fas fa-external-link-alt"></i> Visit Addy.io
+                    </a>
+                </div>
+
+                <div class="resource-card" data-category="email-masking">
+                    <h3><i class="fas fa-at"></i> AnonAddy</h3>
+                    <p>Allows users to create anonymous email aliases, forwarding emails to their real inbox.</p>
+                    <a href="https://anonaddy.com/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit AnonAddy
                     </a>
                 </div>
 
@@ -1212,7 +1124,7 @@
                 <!-- Temporary Phone Number Resources -->
                 <div class="resource-card" data-category="temp-phone">
                     <h3><i class="fas fa-sim-card"></i> OnlineSim</h3>
-                    <p>Virtual phone numbers to receive SMS from various countries for account verification without revealing real numbers.</p>
+                    <p>Virtual phone numbers to receive SMS from various countries for account verification.</p>
                     <a href="https://onlinesim.net/" target="_blank">
                         <i class="fas fa-external-link-alt"></i> Visit OnlineSim
                     </a>
@@ -1220,7 +1132,7 @@
 
                 <div class="resource-card" data-category="temp-phone">
                     <h3><i class="fas fa-gavel"></i> DoNotPay</h3>
-                    <p>Temporary phone numbers for bypassing phone verification on websites while maintaining privacy.</p>
+                    <p>Temporary phone numbers for bypassing phone verification on websites.</p>
                     <a href="https://donotpay.com/learn/temporary-phone-number/" target="_blank">
                         <i class="fas fa-external-link-alt"></i> Visit DoNotPay
                     </a>
@@ -1258,14 +1170,6 @@
                     </a>
                 </div>
 
-                <div class="resource-card" data-category="temp-phone">
-                    <h3><i class="fas fa-voicemail"></i> IntelTechniques VoIP Suite</h3>
-                    <p>Collection of tools and resources for using VoIP services securely for anonymous phone lines.</p>
-                    <a href="https://inteltechniques.com/voip.suite.html" target="_blank">
-                        <i class="fas fa-external-link-alt"></i> Visit VoIP Suite
-                    </a>
-                </div>
-
                 <!-- Anonymous SMS Services Resources -->
                 <div class="resource-card" data-category="anonymous-sms">
                     <h3><i class="fas fa-globe"></i> Globfone</h3>
@@ -1291,11 +1195,70 @@
                     </a>
                 </div>
 
-                <div class="resource-card" data-category="anonymous-sms">
-                    <h3><i class="fab fa-aws"></i> Amazon SNS</h3>
-                    <p>Fully managed pub/sub messaging and mobile notifications service for coordinating the delivery of messages to subscribing endpoints and clients, beneficial for automated notifications in OSINT operations.</p>
-                    <a href="https://aws.amazon.com/sns/" target="_blank">
-                        <i class="fas fa-external-link-alt"></i> Visit Amazon SNS
+                <!-- BIOS/Firmware Resources -->
+                <div class="resource-card" data-category="bios">
+                    <h3><i class="fas fa-microchip"></i> Coreboot</h3>
+                    <p>Fast, lightweight open-source firmware with excellent boot speed and enhanced security.</p>
+                    <a href="https://www.coreboot.org/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Coreboot
+                    </a>
+                </div>
+
+                <div class="resource-card" data-category="bios">
+                    <h3><i class="fas fa-freedom"></i> Libreboot</h3>
+                    <p>Coreboot variant with strict free software focus, removing all proprietary blobs.</p>
+                    <a href="https://libreboot.org/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Libreboot
+                    </a>
+                </div>
+
+                <div class="resource-card" data-category="bios">
+                    <h3><i class="fas fa-head-side"></i> Heads</h3>
+                    <p>Security-focused firmware using Coreboot as base with TPM and USB security key support.</p>
+                    <a href="https://osresearch.net/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Heads
+                    </a>
+                </div>
+
+                <!-- Private Banking Resources -->
+                <div class="resource-card" data-category="bank">
+                    <h3><i class="fas fa-university"></i> Pictet Group</h3>
+                    <p>Swiss private bank with over 200 years of tradition in wealth management and asset protection.</p>
+                    <a href="https://www.pictet.com" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Pictet Group
+                    </a>
+                </div>
+
+                <div class="resource-card" data-category="bank">
+                    <h3><i class="fas fa-landmark"></i> Lombard Odier</h3>
+                    <p>Independent Swiss private bank offering wealth and asset management services since 1796.</p>
+                    <a href="https://www.lombardodier.com" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Lombard Odier
+                    </a>
+                </div>
+
+                <!-- Cryptocurrency Resources -->
+                <div class="resource-card" data-category="crypto">
+                    <h3><i class="fas fa-coins"></i> Monero (XMR)</h3>
+                    <p>Mandatory privacy for all transactions using Ring Signatures, Stealth Addresses, and RingCT.</p>
+                    <a href="https://www.getmonero.org" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Monero
+                    </a>
+                </div>
+
+                <div class="resource-card" data-category="crypto">
+                    <h3><i class="fas fa-shield-alt"></i> Zcash (ZEC)</h3>
+                    <p>Optional privacy using zk-SNARKs for shielded transactions.</p>
+                    <a href="https://z.cash" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Zcash
+                    </a>
+                </div>
+
+                <div class="resource-card" data-category="crypto">
+                    <h3><i class="fas fa-bolt"></i> Firo (FIRO)</h3>
+                    <p>Uses Lelantus Spark protocol to burn and redeem coins with no transaction history.</p>
+                    <a href="https://firo.org" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Firo
                     </a>
                 </div>
 
@@ -1324,18 +1287,10 @@
                     </a>
                 </div>
 
-                <div class="resource-card" data-category="os">
-                    <h3><i class="fas fa-parrot"></i> Parrot Security OS</h3>
-                    <p>Security and privacy-oriented Linux distribution for penetration testing and development.</p>
-                    <a href="https://parrotsec.org/download/" target="_blank">
-                        <i class="fas fa-external-link-alt"></i> Visit Parrot OS
-                    </a>
-                </div>
-
                 <!-- VoIP Services -->
                 <div class="resource-card" data-category="voip">
                     <h3><i class="fas fa-phone-alt"></i> IntelTechniques VoIP Suite</h3>
-                    <p>A collection of tools and resources for using VoIP services securely, ideal for creating anonymous phone lines for investigations.</p>
+                    <p>A collection of tools and resources for using VoIP services securely.</p>
                     <a href="https://inteltechniques.com/voip.suite.html" target="_blank">
                         <i class="fas fa-external-link-alt"></i> Visit VoIP Suite
                     </a>
@@ -1343,24 +1298,25 @@
 
                 <div class="resource-card" data-category="voip">
                     <h3><i class="fas fa-terminal"></i> IntelTechniques Twilio CLI</h3>
-                    <p>Provides guidance on using Twilio's Command Line Interface for creating and managing VoIP services, a versatile tool for OSINT practitioners needing temporary phone solutions.</p>
+                    <p>Provides guidance on using Twilio's Command Line Interface for creating and managing VoIP services.</p>
                     <a href="https://inteltechniques.com/voip.twilio.cli.html" target="_blank">
                         <i class="fas fa-external-link-alt"></i> Visit Twilio CLI Guide
                     </a>
                 </div>
 
-                <div class="resource-card" data-category="voip">
-                    <h3><i class="fas fa-shield-alt"></i> Threader on VoIP Security</h3>
-                    <p>A Twitter thread that discusses the importance of securing VoIP communications, particularly relevant for OSINT practitioners who rely on these technologies for anonymous interactions.</p>
-                    <a href="https://threader.app/thread/1199785692274077696" target="_blank">
-                        <i class="fas fa-external-link-alt"></i> Read Thread
+                <!-- Cloud Communications -->
+                <div class="resource-card" data-category="cloud-comms">
+                    <h3><i class="fab fa-aws"></i> Amazon SNS</h3>
+                    <p>Fully managed pub/sub messaging and mobile notifications service for coordinating message delivery.</p>
+                    <a href="https://aws.amazon.com/sns/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Amazon SNS
                     </a>
                 </div>
 
                 <!-- Username Generators -->
                 <div class="resource-card" data-category="username-gen">
                     <h3><i class="fas fa-user-tag"></i> LastPass Username Generator</h3>
-                    <p>Creates complex usernames to enhance online security, useful for creating accounts where identity protection is key.</p>
+                    <p>Creates complex usernames to enhance online security.</p>
                     <a href="https://www.lastpass.com/features/username-generator" target="_blank">
                         <i class="fas fa-external-link-alt"></i> Visit LastPass
                     </a>
@@ -1368,7 +1324,7 @@
 
                 <div class="resource-card" data-category="username-gen">
                     <h3><i class="fas fa-user-tag"></i> Behind the Name Random Generator</h3>
-                    <p>Produces names from various cultures and eras, handy for creating believable characters or user profiles.</p>
+                    <p>Produces names from various cultures and eras for believable user profiles.</p>
                     <a href="https://www.behindthename.com/random/" target="_blank">
                         <i class="fas fa-external-link-alt"></i> Visit Behind the Name
                     </a>
@@ -1377,7 +1333,7 @@
                 <!-- Identity Generators -->
                 <div class="resource-card" data-category="identity-gen">
                     <h3><i class="fas fa-id-card"></i> Fake Name Generator</h3>
-                    <p>Offers detailed fake identities including names, addresses, and more, ideal for online registrations without revealing true identity.</p>
+                    <p>Offers detailed fake identities including names, addresses, and more.</p>
                     <a href="https://www.fakenamegenerator.com/" target="_blank">
                         <i class="fas fa-external-link-alt"></i> Visit Fake Name Generator
                     </a>
@@ -1385,7 +1341,7 @@
 
                 <div class="resource-card" data-category="identity-gen">
                     <h3><i class="fas fa-id-card"></i> ElfQrin Fake ID Generator</h3>
-                    <p>A comprehensive tool for generating fake identities, including names, addresses, credit card numbers, and more, for a variety of testing scenarios.</p>
+                    <p>A comprehensive tool for generating fake identities for testing scenarios.</p>
                     <a href="https://www.elfqrin.com/fakeid.php" target="_blank">
                         <i class="fas fa-external-link-alt"></i> Visit ElfQrin
                     </a>
@@ -1393,7 +1349,7 @@
 
                 <div class="resource-card" data-category="identity-gen">
                     <h3><i class="fas fa-id-card"></i> FauxID.com Tools</h3>
-                    <p>A suite of tools for generating fake identities, addresses, phone numbers, and more, supporting a wide range of privacy and testing needs.</p>
+                    <p>A suite of tools for generating fake identities, addresses, phone numbers, and more.</p>
                     <a href="https://fauxid.com/tools" target="_blank">
                         <i class="fas fa-external-link-alt"></i> Visit FauxID
                     </a>
@@ -1402,7 +1358,7 @@
                 <!-- Document Generators -->
                 <div class="resource-card" data-category="document-gen">
                     <h3><i class="fas fa-file-alt"></i> This Resume Does Not Exist</h3>
-                    <p>Generates fictional resumes for a variety of job roles, useful for testing or as placeholders.</p>
+                    <p>Generates fictional resumes for a variety of job roles.</p>
                     <a href="https://thisresumedoesnotexist.com/" target="_blank">
                         <i class="fas fa-external-link-alt"></i> Visit Resume Generator
                     </a>
@@ -1410,7 +1366,7 @@
 
                 <div class="resource-card" data-category="document-gen">
                     <h3><i class="fas fa-file-alt"></i> Resume Builder by Vinay Somawat</h3>
-                    <p>An interactive tool for creating professional-looking resumes quickly and easily, ideal for generating realistic job applicant data.</p>
+                    <p>An interactive tool for creating professional-looking resumes quickly and easily.</p>
                     <a href="https://vinaysomawat.github.io/Resume-Builder/" target="_blank">
                         <i class="fas fa-external-link-alt"></i> Visit Resume Builder
                     </a>
@@ -1418,7 +1374,7 @@
 
                 <div class="resource-card" data-category="document-gen">
                     <h3><i class="fas fa-file-alt"></i> This Rental Does Not Exist</h3>
-                    <p>Generates fictional rental listings with photos, useful for testing real estate platforms.</p>
+                    <p>Generates fictional rental listings with photos for testing real estate platforms.</p>
                     <a href="https://thisrentaldoesnotexist.com/" target="_blank">
                         <i class="fas fa-external-link-alt"></i> Visit Rental Generator
                     </a>
@@ -1435,7 +1391,7 @@
 
                 <div class="resource-card" data-category="id-validators">
                     <h3><i class="fas fa-check-circle"></i> ABA Validator</h3>
-                    <p>Validates American Bankers Association routing numbers, essential for testing financial applications.</p>
+                    <p>Validates American Bankers Association routing numbers for financial applications.</p>
                     <a href="https://www.fakenamegenerator.com/aba-validator.php" target="_blank">
                         <i class="fas fa-external-link-alt"></i> Visit ABA Validator
                     </a>
@@ -1444,7 +1400,7 @@
                 <!-- Unique ID Generators -->
                 <div class="resource-card" data-category="unique-id-gen">
                     <h3><i class="fas fa-fingerprint"></i> IID Generator by Georgy Bu</h3>
-                    <p>A tool for generating unique instance identifiers, useful for software development and testing database uniqueness.</p>
+                    <p>A tool for generating unique instance identifiers for software development.</p>
                     <a href="https://georgybu.github.io/IID_Generator/" target="_blank">
                         <i class="fas fa-external-link-alt"></i> Visit IID Generator
                     </a>
@@ -1452,7 +1408,7 @@
 
                 <div class="resource-card" data-category="unique-id-gen">
                     <h3><i class="fas fa-fingerprint"></i> ShortGUID by Richard Kundl</h3>
-                    <p>Provides a method to generate shortened, unique GUIDs, optimizing space in databases or for use in URLs.</p>
+                    <p>Provides a method to generate shortened, unique GUIDs for databases or URLs.</p>
                     <a href="https://richardkundl.github.io/shortguid/" target="_blank">
                         <i class="fas fa-external-link-alt"></i> Visit ShortGUID
                     </a>
@@ -1460,7 +1416,7 @@
 
                 <div class="resource-card" data-category="unique-id-gen">
                     <h3><i class="fas fa-fingerprint"></i> Nano ID by Zelark</h3>
-                    <p>An ultrafast, secure URL-friendly unique string ID generator, perfect for web development and ensuring collision-free identifiers.</p>
+                    <p>An ultrafast, secure URL-friendly unique string ID generator for web development.</p>
                     <a href="https://zelark.github.io/nano-id-cc/" target="_blank">
                         <i class="fas fa-external-link-alt"></i> Visit Nano ID
                     </a>
@@ -1469,7 +1425,7 @@
                 <!-- National ID Generators -->
                 <div class="resource-card" data-category="id-validators">
                     <h3><i class="fas fa-passport"></i> WPIMEI Generator</h3>
-                    <p>Creates random but valid IMEI numbers for mobile devices, useful for testing mobile applications or services.</p>
+                    <p>Creates random but valid IMEI numbers for mobile devices.</p>
                     <a href="https://wpimeigenerator.github.io/" target="_blank">
                         <i class="fas fa-external-link-alt"></i> Visit WPIMEI Generator
                     </a>
@@ -1477,7 +1433,7 @@
 
                 <div class="resource-card" data-category="id-validators">
                     <h3><i class="fas fa-passport"></i> DYRK IMEI Tools</h3>
-                    <p>Another tool for generating and validating IMEI numbers, supporting developers and testers in mobile ecosystem.</p>
+                    <p>Another tool for generating and validating IMEI numbers for mobile ecosystem.</p>
                     <a href="https://dyrk.org/tools/imei/" target="_blank">
                         <i class="fas fa-external-link-alt"></i> Visit DYRK IMEI Tools
                     </a>
@@ -1485,7 +1441,7 @@
 
                 <div class="resource-card" data-category="id-validators">
                     <h3><i class="fas fa-passport"></i> ElfQrin US SSN & Driver License ID Generator</h3>
-                    <p>Generates fake US Social Security Numbers and Driver's Licenses, useful for verification or testing purposes.</p>
+                    <p>Generates fake US Social Security Numbers and Driver's Licenses for verification.</p>
                     <a href="https://www.elfqrin.com/usssndriverlicenseidgen.php" target="_blank">
                         <i class="fas fa-external-link-alt"></i> Visit ElfQrin ID Generator
                     </a>
@@ -1493,7 +1449,7 @@
 
                 <div class="resource-card" data-category="id-validators">
                     <h3><i class="fas fa-passport"></i> Washington Drivers License Generator</h3>
-                    <p>Creates fake Washington state driver's licenses, suitable for testing form inputs or verification systems.</p>
+                    <p>Creates fake Washington state driver's licenses for testing form inputs.</p>
                     <a href="https://mmarvick.github.io/wa-drivers-license/" target="_blank">
                         <i class="fas fa-external-link-alt"></i> Visit WA License Generator
                     </a>
@@ -1501,7 +1457,7 @@
 
                 <div class="resource-card" data-category="id-validators">
                     <h3><i class="fas fa-passport"></i> FakeInfo Drivers License Generator</h3>
-                    <p>Offers a tool to generate drivers' licenses for multiple states, ideal for UI testing or mock-ups.</p>
+                    <p>Offers a tool to generate drivers' licenses for multiple states for UI testing.</p>
                     <a href="https://fakeinfo.net/drivers-license-generator" target="_blank">
                         <i class="fas fa-external-link-alt"></i> Visit FakeInfo License Generator
                     </a>
@@ -1509,7 +1465,7 @@
 
                 <div class="resource-card" data-category="id-validators">
                     <h3><i class="fas fa-passport"></i> Generate SA ID Numbers</h3>
-                    <p>Creates valid South African ID numbers, useful for testing forms and databases requiring this specific national identifier.</p>
+                    <p>Creates valid South African ID numbers for testing forms and databases.</p>
                     <a href="https://chris927.github.io/generate-sa-idnumbers/" target="_blank">
                         <i class="fas fa-external-link-alt"></i> Visit SA ID Generator
                     </a>
@@ -1517,7 +1473,7 @@
 
                 <div class="resource-card" data-category="id-validators">
                     <h3><i class="fas fa-passport"></i> SSN Generator by Steve Morse</h3>
-                    <p>A simple tool for generating random Social Security Numbers, aiding in privacy protection during tests and verifications.</p>
+                    <p>A simple tool for generating random Social Security Numbers for testing.</p>
                     <a href="https://stevemorse.org/ssn/ssn.html" target="_blank">
                         <i class="fas fa-external-link-alt"></i> Visit SSN Generator
                     </a>
@@ -1525,7 +1481,7 @@
 
                 <div class="resource-card" data-category="id-validators">
                     <h3><i class="fas fa-passport"></i> Driver's License Generator by Steve Morse</h3>
-                    <p>Offers a method to create plausible driver's license numbers for various states, useful for application testing and form validations.</p>
+                    <p>Offers a method to create plausible driver's license numbers for various states.</p>
                     <a href="https://stevemorse.org/dl/dl.html" target="_blank">
                         <i class="fas fa-external-link-alt"></i> Visit DL Generator
                     </a>
@@ -1533,7 +1489,7 @@
 
                 <div class="resource-card" data-category="id-validators">
                     <h3><i class="fas fa-passport"></i> Social Insurance Number Generator</h3>
-                    <p>Generates fake Canadian Social Insurance Numbers, useful for testing forms that require this information.</p>
+                    <p>Generates fake Canadian Social Insurance Numbers for testing forms.</p>
                     <a href="https://www.fakenamegenerator.com/social-insurance-number.php" target="_blank">
                         <i class="fas fa-external-link-alt"></i> Visit SIN Generator
                     </a>
@@ -1541,7 +1497,7 @@
 
                 <div class="resource-card" data-category="id-validators">
                     <h3><i class="fas fa-passport"></i> Vehicle Identification Number Generator</h3>
-                    <p>Creates fake VINs, aiding in automotive-related testing or database mock-ups.</p>
+                    <p>Creates fake VINs for automotive-related testing or database mock-ups.</p>
                     <a href="https://www.fakenamegenerator.com/vehicle-identification-number.php" target="_blank">
                         <i class="fas fa-external-link-alt"></i> Visit VIN Generator
                     </a>
@@ -1557,7 +1513,7 @@
 
                 <div class="resource-card" data-category="id-validators">
                     <h3><i class="fas fa-passport"></i> Social Security Number Generator (Fake Name Generator)</h3>
-                    <p>Facilitates the generation of fake US Social Security Numbers, aiding users in testing without using genuine identifiers.</p>
+                    <p>Facilitates the generation of fake US Social Security Numbers for testing.</p>
                     <a href="https://www.fakenamegenerator.com/social-security-number.php" target="_blank">
                         <i class="fas fa-external-link-alt"></i> Visit SSN Generator
                     </a>
@@ -1566,7 +1522,7 @@
                 <!-- AI Face Generators -->
                 <div class="resource-card" data-category="ai-face-gen">
                     <h3><i class="fas fa-user-circle"></i> This Person Does Not Exist</h3>
-                    <p>Creates photorealistic faces using AI, perfect for generating anonymous profile pictures or characters.</p>
+                    <p>Creates photorealistic faces using AI for anonymous profile pictures.</p>
                     <a href="https://thispersondoesnotexist.com/" target="_blank">
                         <i class="fas fa-external-link-alt"></i> Visit This Person Does Not Exist
                     </a>
@@ -1574,7 +1530,7 @@
 
                 <div class="resource-card" data-category="ai-face-gen">
                     <h3><i class="fas fa-user-circle"></i> Random Face Generator (FakeInfo)</h3>
-                    <p>Another tool for generating AI-generated faces, enhancing anonymity in online profiles.</p>
+                    <p>Another tool for generating AI-generated faces for online profiles.</p>
                     <a href="https://fakeinfo.net/random-face-generator" target="_blank">
                         <i class="fas fa-external-link-alt"></i> Visit Random Face Generator
                     </a>
@@ -1583,7 +1539,7 @@
                 <!-- Social Profile Generators -->
                 <div class="resource-card" data-category="social-profile-gen">
                     <h3><i class="fas fa-share-alt"></i> Dating Profile Generator</h3>
-                    <p>Automatically generates profiles for dating websites, including biographies and conversations, ideal for creating realistic test profiles.</p>
+                    <p>Automatically generates profiles for dating websites with biographies and conversations.</p>
                     <a href="https://www.dating-profile-generator.org.uk/" target="_blank">
                         <i class="fas fa-external-link-alt"></i> Visit Dating Profile Generator
                     </a>
@@ -1591,7 +1547,7 @@
 
                 <div class="resource-card" data-category="social-profile-gen">
                     <h3><i class="fab fa-twitter"></i> Fake Twitter Profile Generator</h3>
-                    <p>Creates Twitter profiles complete with bios, tweets, and followers, useful for social media research and mock-ups.</p>
+                    <p>Creates Twitter profiles complete with bios, tweets, and followers.</p>
                     <a href="https://fakeinfo.net/fake-twitter-profile-generator" target="_blank">
                         <i class="fas fa-external-link-alt"></i> Visit Twitter Profile Generator
                     </a>
@@ -1599,7 +1555,7 @@
 
                 <div class="resource-card" data-category="social-profile-gen">
                     <h3><i class="fab fa-tiktok"></i> Fake TikTok Profile Generator</h3>
-                    <p>Offers a tool to create TikTok profiles, aiding in the design of social media campaigns or research without using real accounts.</p>
+                    <p>Offers a tool to create TikTok profiles for social media campaigns or research.</p>
                     <a href="https://fakeinfo.net/fake-tiktok-profile-gererator" target="_blank">
                         <i class="fas fa-external-link-alt"></i> Visit TikTok Profile Generator
                     </a>
@@ -1607,7 +1563,7 @@
 
                 <div class="resource-card" data-category="social-profile-gen">
                     <h3><i class="fab fa-youtube"></i> Fake YouTube Channel Generator</h3>
-                    <p>Generates YouTube channel descriptions, including subscriber counts and video statistics, for mock-ups or research.</p>
+                    <p>Generates YouTube channel descriptions with subscriber counts and video statistics.</p>
                     <a href="https://fakeinfo.net/fake-youtube-channel-generator" target="_blank">
                         <i class="fas fa-external-link-alt"></i> Visit YouTube Channel Generator
                     </a>
@@ -1616,7 +1572,7 @@
                 <!-- Company Generators -->
                 <div class="resource-card" data-category="profile-gen">
                     <h3><i class="fas fa-building"></i> Company Name Generator (FakeInfo)</h3>
-                    <p>Generates business names, suitable for brainstorming startup ideas or for use in mock-ups and presentations.</p>
+                    <p>Generates business names for brainstorming startup ideas or mock-ups.</p>
                     <a href="https://fakeinfo.net/company-name-generator" target="_blank">
                         <i class="fas fa-external-link-alt"></i> Visit Company Name Generator
                     </a>
@@ -1625,42 +1581,16 @@
                 <!-- Allred Tech (General category) -->
                 <div class="resource-card" data-category="all">
                     <h3><i class="fas fa-tools"></i> Allred Tech</h3>
-                    <p>Provides a variety of tech tools and resources, potentially including ID generators among its offerings.</p>
+                    <p>Provides a variety of tech tools and resources, including ID generators.</p>
                     <a href="https://www.allredtech.com/" target="_blank">
                         <i class="fas fa-external-link-alt"></i> Visit Allred Tech
-                    </a>
-                </div>
-
-                <!-- Email Masking - Additional -->
-                <div class="resource-card" data-category="email-masking">
-                    <h3><i class="fas fa-at"></i> AnonAddy</h3>
-                    <p>Allows users to create anonymous email aliases, forwarding emails to their real inbox while keeping their identity hidden.</p>
-                    <a href="https://anonaddy.com/" target="_blank">
-                        <i class="fas fa-external-link-alt"></i> Visit AnonAddy
-                    </a>
-                </div>
-
-                <!-- Cloud Communications -->
-                <div class="resource-card" data-category="cloud-comms">
-                    <h3><i class="fab fa-aws"></i> Amazon SNS</h3>
-                    <p>A flexible, fully managed pub/sub messaging and mobile notifications service for coordinating the delivery of messages to subscribing endpoints and clients, beneficial for automated notifications in OSINT operations.</p>
-                    <a href="https://aws.amazon.com/sns/" target="_blank">
-                        <i class="fas fa-external-link-alt"></i> Visit Amazon SNS
-                    </a>
-                </div>
-
-                <div class="resource-card" data-category="cloud-comms">
-                    <h3><i class="fas fa-phone-square"></i> Twilio</h3>
-                    <p>Offers a cloud communications platform for making and receiving calls and texts, enabling the creation of disposable numbers for secure communications.</p>
-                    <a href="https://www.twilio.com/" target="_blank">
-                        <i class="fas fa-external-link-alt"></i> Visit Twilio
                     </a>
                 </div>
 
                 <!-- Anonymous Messaging -->
                 <div class="resource-card" data-category="messaging">
                     <h3><i class="fas fa-sms"></i> Globfone</h3>
-                    <p>A free service for sending text messages globally without using a personal phone number, useful for anonymous communication.</p>
+                    <p>A free service for sending text messages globally without using a personal phone number.</p>
                     <a href="https://globfone.com/send-text/" target="_blank">
                         <i class="fas fa-external-link-alt"></i> Visit Globfone
                     </a>
@@ -1668,7 +1598,7 @@
 
                 <div class="resource-card" data-category="messaging">
                     <h3><i class="fas fa-paper-plane"></i> SendAText</h3>
-                    <p>Enables users to send free text messages online to various countries, a handy tool for anonymous communication.</p>
+                    <p>Enables users to send free text messages online to various countries.</p>
                     <a href="https://www.sendatext.co/" target="_blank">
                         <i class="fas fa-external-link-alt"></i> Visit SendAText
                     </a>
@@ -1676,7 +1606,7 @@
 
                 <div class="resource-card" data-category="messaging">
                     <h3><i class="fas fa-fax"></i> FaxZero</h3>
-                    <p>Allows sending free faxes online, suitable for sending documents anonymously or without a fax machine.</p>
+                    <p>Allows sending free faxes online for sending documents anonymously.</p>
                     <a href="https://faxzero.com/" target="_blank">
                         <i class="fas fa-external-link-alt"></i> Visit FaxZero
                     </a>
