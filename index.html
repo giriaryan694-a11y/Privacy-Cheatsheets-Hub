@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Cheatsheets Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -11,278 +12,94 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --primary: #667eea;
+            --primary-dark: #5a6fd8;
+            --secondary: #764ba2;
+            --accent: #bb86fc;
+            --light: #f8f9fa;
+            --dark: #1a1a2e;
+            --dark-secondary: #16213e;
+            --text-light: #333;
+            --text-dark: #e8e8e8;
+            --text-muted: #666;
+            --card-bg: #ffffff;
+            --card-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            --border-radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             min-height: 100vh;
             padding: 20px;
-            transition: background 0.3s ease;
+            transition: var(--transition);
+            color: var(--text-light);
         }
 
         body.dark-mode {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-        }
-
-        body.dark-mode .main-content {
-            background: #0f3460;
-            color: #e8e8e8;
-        }
-
-        body.dark-mode .resource-card {
-            background: #16213e;
-            color: #e8e8e8;
-        }
-
-        body.dark-mode .resource-card h3 {
-            color: #bb86fc;
-        }
-
-        body.dark-mode .resource-card p {
-            color: #b8b8b8;
-        }
-
-        body.dark-mode .category-bar {
-            background: #0f3460;
-        }
-
-        body.dark-mode .category-bar h2 {
-            color: #bb86fc;
-        }
-
-        body.dark-mode .search-box input {
-            background: #16213e;
-            color: #e8e8e8;
-            border-color: #bb86fc;
-        }
-
-        body.dark-mode .category-item {
-            background: linear-gradient(135deg, #533483 0%, #1a1a2e 100%);
-        }
-
-        body.dark-mode .category-title {
-            color: #bb86fc;
+            background: linear-gradient(135deg, var(--dark) 0%, var(--dark-secondary) 100%);
+            color: var(--text-dark);
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             display: flex;
-            gap: 20px;
+            gap: 30px;
         }
 
-        .sidebar {
-            width: 60px;
-            transition: width 0.3s ease;
-            position: relative;
+        /* Header & Navigation */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
         }
 
-        .menu-btn {
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            font-size: 32px;
+            background: white;
             width: 50px;
             height: 50px;
-            background: white;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
+            border-radius: 50%;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
-            gap: 5px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: transform 0.2s;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
-        .menu-btn:hover {
-            transform: scale(1.05);
-        }
-
-        .menu-btn span {
-            width: 25px;
-            height: 3px;
-            background: #667eea;
-            border-radius: 2px;
-            transition: 0.3s;
-        }
-
-        .category-bar {
-            position: fixed;
-            left: -300px;
-            top: 0;
-            width: 280px;
-            height: 100vh;
-            background: white;
-            box-shadow: 2px 0 10px rgba(0,0,0,0.2);
-            transition: left 0.3s ease;
-            padding: 20px;
-            z-index: 1000;
-            overflow-y: auto;
-        }
-
-        .category-bar.active {
-            left: 0;
-        }
-
-        .category-bar h2 {
-            color: #667eea;
-            margin-bottom: 20px;
-            font-size: 24px;
-        }
-
-        .search-box {
-            margin-bottom: 20px;
-        }
-
-        .search-box input {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #667eea;
-            border-radius: 8px;
-            font-size: 14px;
-            outline: none;
-            transition: border-color 0.3s;
-        }
-
-        .search-box input:focus {
-            border-color: #764ba2;
-        }
-
-        .category-item.hidden {
-            display: none;
-        }
-
-        .category-item {
-            padding: 15px;
-            margin: 10px 0;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: transform 0.2s;
-            text-align: center;
-            font-weight: 600;
-        }
-
-        .category-item:hover {
-            transform: translateX(5px);
-        }
-
-        .main-content {
-            flex: 1;
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-
-        .banner {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 30px;
-            border-radius: 15px;
-            color: white;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        .banner h1 {
-            font-size: 36px;
-            margin-bottom: 10px;
-        }
-
-        .banner p {
-            font-size: 18px;
-            margin-bottom: 20px;
-        }
-
-        .made-by {
-            font-size: 14px;
-            opacity: 0.9;
-            font-style: italic;
-        }
-
-        .resources-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
-        }
-
-        .resource-card {
-            background: #f8f9fa;
-            padding: 25px;
-            border-radius: 15px;
-            border-left: 5px solid #667eea;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .resource-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .resource-card h3 {
-            color: #667eea;
-            margin-bottom: 10px;
-            font-size: 20px;
-        }
-
-        .resource-card p {
-            color: #666;
-            margin-bottom: 15px;
-            line-height: 1.6;
-        }
-
-        .resource-card a {
-            display: inline-block;
-            padding: 10px 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: transform 0.2s;
-        }
-
-        .resource-card a:hover {
-            transform: scale(1.05);
-        }
-
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 999;
-        }
-
-        .overlay.active {
-            display: block;
-        }
-
-        .category-title {
+        .logo-text h1 {
             font-size: 28px;
-            color: #667eea;
-            margin-bottom: 20px;
-            text-align: center;
+            color: white;
+            margin-bottom: 5px;
+        }
+
+        .logo-text p {
+            color: rgba(255,255,255,0.8);
+            font-size: 14px;
         }
 
         .theme-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
             width: 50px;
             height: 50px;
             background: white;
             border: none;
             border-radius: 50%;
             cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
-            transition: transform 0.2s, background 0.3s;
+            font-size: 20px;
+            transition: var(--transition);
             z-index: 1001;
         }
 
@@ -291,62 +108,549 @@
         }
 
         body.dark-mode .theme-toggle {
-            background: #16213e;
+            background: var(--dark-secondary);
+            color: var(--accent);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            flex-shrink: 0;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            padding: 25px;
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+            transition: var(--transition);
+        }
+
+        body.dark-mode .sidebar {
+            background: var(--dark-secondary);
+        }
+
+        .sidebar h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 22px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        body.dark-mode .sidebar h2 {
+            color: var(--accent);
+        }
+
+        .search-box {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 15px 12px 45px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+            transition: var(--transition);
+            background: var(--light);
+        }
+
+        body.dark-mode .search-box input {
+            background: var(--dark);
+            border-color: #333;
+            color: var(--text-dark);
+        }
+
+        .search-box input:focus {
+            border-color: var(--primary);
+        }
+
+        body.dark-mode .search-box input:focus {
+            border-color: var(--accent);
+        }
+
+        .categories {
+            max-height: 500px;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+
+        .categories::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .categories::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        body.dark-mode .categories::-webkit-scrollbar-track {
+            background: #2a2a3e;
+        }
+
+        .categories::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+        }
+
+        body.dark-mode .categories::-webkit-scrollbar-thumb {
+            background: var(--accent);
+        }
+
+        .category-item {
+            padding: 15px;
+            margin: 10px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        body.dark-mode .category-item {
+            background: linear-gradient(135deg, #533483 0%, var(--dark) 100%);
+        }
+
+        .category-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .category-item i {
+            font-size: 18px;
+        }
+
+        .category-item.hidden {
+            display: none;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 40px;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+        }
+
+        body.dark-mode .main-content {
+            background: var(--dark-secondary);
+        }
+
+        .banner {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            padding: 40px;
+            border-radius: 15px;
+            color: white;
+            margin-bottom: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 200%;
+            background: rgba(255,255,255,0.1);
+            transform: rotate(30deg);
+        }
+
+        .banner h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .banner p {
+            font-size: 18px;
+            margin-bottom: 20px;
+            opacity: 0.9;
+            position: relative;
+        }
+
+        .made-by {
+            font-size: 14px;
+            opacity: 0.8;
+            font-style: italic;
+            position: relative;
+        }
+
+        .category-title {
+            font-size: 32px;
+            color: var(--primary);
+            margin-bottom: 30px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        body.dark-mode .category-title {
+            color: var(--accent);
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .resource-card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: var(--border-radius);
+            border-left: 5px solid var(--primary);
+            transition: var(--transition);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        body.dark-mode .resource-card {
+            background: var(--dark);
+            border-left-color: var(--accent);
+        }
+
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .resource-card h3 {
+            color: var(--primary);
+            margin-bottom: 12px;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        body.dark-mode .resource-card h3 {
+            color: var(--accent);
+        }
+
+        .resource-card p {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        body.dark-mode .resource-card p {
+            color: #b8b8b8;
+        }
+
+        .resource-card a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: var(--transition);
+            font-weight: 600;
+            width: fit-content;
+        }
+
+        .resource-card a:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        body.dark-mode .stats {
+            border-top-color: #333;
+        }
+
+        /* Mobile Navigation */
+        .mobile-menu-btn {
+            display: none;
+            width: 50px;
+            height: 50px;
+            background: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: var(--transition);
+        }
+
+        .mobile-menu-btn span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+
+        .mobile-menu-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .mobile-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 998;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                position: static;
+            }
+            
+            .categories {
+                max-height: 300px;
+            }
         }
 
         @media (max-width: 768px) {
-            .container {
-                flex-direction: column;
+            .header {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+            
+            .logo-text h1 {
+                font-size: 24px;
+            }
+            
+            .main-content {
+                padding: 25px;
+            }
+            
+            .banner {
+                padding: 30px 20px;
+            }
+            
+            .banner h1 {
+                font-size: 32px;
             }
             
             .resources-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .category-title {
+                font-size: 26px;
+            }
+            
+            .mobile-menu-btn {
+                display: flex;
+            }
+            
+            .sidebar {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 280px;
+                height: 100vh;
+                z-index: 999;
+                border-radius: 0;
+                overflow-y: auto;
+            }
+            
+            .sidebar.active {
+                display: block;
+            }
+            
+            .mobile-overlay.active {
+                display: block;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 15px;
+            }
+            
+            .main-content {
+                padding: 20px;
+            }
+            
+            .banner h1 {
+                font-size: 28px;
+            }
+            
+            .category-title {
+                font-size: 24px;
+            }
         }
     </style>
 </head>
 <body>
-    <button class="theme-toggle" id="themeToggle">🌙</button>
-    <div class="overlay" id="overlay"></div>
+    <div class="mobile-overlay" id="mobileOverlay"></div>
     
     <div class="container">
-        <div class="sidebar">
-            <button class="menu-btn" id="menuBtn">
+        <div class="header">
+            <div class="logo">
+                <div class="logo-icon">🔒</div>
+                <div class="logo-text">
+                    <h1>Privacy Cheatsheets Hub</h1>
+                    <p>Your comprehensive guide to online privacy</p>
+                </div>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
+            
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
         </div>
 
-        <div class="category-bar" id="categoryBar">
-            <h2>Categories</h2>
+        <div class="sidebar" id="sidebar">
+            <h2><i class="fas fa-filter"></i> Categories</h2>
             <div class="search-box">
+                <i class="fas fa-search"></i>
                 <input type="text" id="categorySearch" placeholder="Search categories...">
             </div>
-            <div class="category-item" data-category="all">All Resources</div>
-            <div class="category-item" data-category="vpn">VPN</div>
-            <div class="category-item" data-category="ai">AI Privacy</div>
-            <div class="category-item" data-category="browser">Browsers</div>
-            <div class="category-item" data-category="search">Search Engines</div>
-            <div class="category-item" data-category="proxy">Proxy</div>
-            <div class="category-item" data-category="encryption">Encryption</div>
-            <div class="category-item" data-category="secure-deletion">Secure Deletion</div>
-            <div class="category-item" data-category="password">Password Managers</div>
-            <div class="category-item" data-category="comms-internet">Communications (Internet)</div>
-            <div class="category-item" data-category="comms-local">Communications (Local)</div>
-            <div class="category-item" data-category="email">Email</div>
-            <div class="category-item" data-category="email-masking">Email Masking</div>
-            <div class="category-item" data-category="disposable">Disposable Emails</div>
-            <div class="category-item" data-category="temp-phone">Temporary Phone Numbers</div>
-            <div class="category-item" data-category="anonymous-sms">Anonymous SMS Services</div>
-            <div class="category-item" data-category="identity-gen">Identity Generators</div>
-            <div class="category-item" data-category="ai-face-gen">AI Face Generators</div>
-            <div class="category-item" data-category="profile-gen">Profile Generators</div>
-            <div class="category-item" data-category="id-validators">ID Validators</div>
-            <div class="category-item" data-category="bios">BIOS/Firmware</div>
-            <div class="category-item" data-category="bank">Private Banking</div>
-            <div class="category-item" data-category="crypto">Cryptocurrencies</div>
-            <div class="category-item" data-category="os">Operating Systems</div>
+            <div class="categories">
+                <div class="category-item" data-category="all">
+                    <i class="fas fa-th-large"></i> All Resources
+                </div>
+                <div class="category-item" data-category="vpn">
+                    <i class="fas fa-shield-alt"></i> VPN
+                </div>
+                <div class="category-item" data-category="ai">
+                    <i class="fas fa-robot"></i> AI Privacy
+                </div>
+                <div class="category-item" data-category="browser">
+                    <i class="fas fa-globe"></i> Browsers
+                </div>
+                <div class="category-item" data-category="search">
+                    <i class="fas fa-search"></i> Search Engines
+                </div>
+                <div class="category-item" data-category="proxy">
+                    <i class="fas fa-random"></i> Proxy
+                </div>
+                <div class="category-item" data-category="encryption">
+                    <i class="fas fa-lock"></i> Encryption
+                </div>
+                <div class="category-item" data-category="secure-deletion">
+                    <i class="fas fa-eraser"></i> Secure Deletion
+                </div>
+                <div class="category-item" data-category="password">
+                    <i class="fas fa-key"></i> Password Managers
+                </div>
+                <div class="category-item" data-category="comms-internet">
+                    <i class="fas fa-comments"></i> Communications (Internet)
+                </div>
+                <div class="category-item" data-category="comms-local">
+                    <i class="fas fa-wifi"></i> Communications (Local)
+                </div>
+                <div class="category-item" data-category="email">
+                    <i class="fas fa-envelope"></i> Email
+                </div>
+                <div class="category-item" data-category="email-masking">
+                    <i class="fas fa-mask"></i> Email Masking
+                </div>
+                <div class="category-item" data-category="disposable">
+                    <i class="fas fa-envelope-open-text"></i> Disposable Emails
+                </div>
+                <div class="category-item" data-category="temp-phone">
+                    <i class="fas fa-phone"></i> Temporary Phone Numbers
+                </div>
+                <div class="category-item" data-category="anonymous-sms">
+                    <i class="fas fa-sms"></i> Anonymous SMS Services
+                </div>
+                <div class="category-item" data-category="identity-gen">
+                    <i class="fas fa-id-card"></i> Identity Generators
+                </div>
+                <div class="category-item" data-category="ai-face-gen">
+                    <i class="fas fa-user-circle"></i> AI Face Generators
+                </div>
+                <div class="category-item" data-category="profile-gen">
+                    <i class="fas fa-user-edit"></i> Profile Generators
+                </div>
+                <div class="category-item" data-category="id-validators">
+                    <i class="fas fa-check-circle"></i> ID Validators
+                </div>
+                <div class="category-item" data-category="bios">
+                    <i class="fas fa-microchip"></i> BIOS/Firmware
+                </div>
+                <div class="category-item" data-category="bank">
+                    <i class="fas fa-university"></i> Private Banking
+                </div>
+                <div class="category-item" data-category="crypto">
+                    <i class="fas fa-coins"></i> Cryptocurrencies
+                </div>
+                <div class="category-item" data-category="os">
+                    <i class="fas fa-desktop"></i> Operating Systems
+                </div>
+                <div class="category-item" data-category="voip">
+                    <i class="fas fa-phone-alt"></i> VoIP Services
+                </div>
+                <div class="category-item" data-category="messaging">
+                    <i class="fas fa-comment-dots"></i> Anonymous Messaging
+                </div>
+                <div class="category-item" data-category="cloud-comms">
+                    <i class="fas fa-cloud"></i> Cloud Communications
+                </div>
+                <div class="category-item" data-category="username-gen">
+                    <i class="fas fa-user-tag"></i> Username Generators
+                </div>
+                <div class="category-item" data-category="document-gen">
+                    <i class="fas fa-file-alt"></i> Document Generators
+                </div>
+                <div class="category-item" data-category="social-profile-gen">
+                    <i class="fas fa-share-alt"></i> Social Profile Generators
+                </div>
+                <div class="category-item" data-category="unique-id-gen">
+                    <i class="fas fa-fingerprint"></i> Unique ID Generators
+                </div>
+            </div>
         </div>
 
         <div class="main-content">
@@ -356,526 +660,1050 @@
                 <div class="made-by">Made by Aryan Giri</div>
             </div>
 
-            <h2 class="category-title" id="categoryTitle">All Privacy Resources</h2>
+            <h2 class="category-title" id="categoryTitle">
+                <i class="fas fa-th-large"></i> All Privacy Resources
+            </h2>
 
             <div class="resources-grid" id="resourcesGrid">
                 <!-- VPN Resources -->
                 <div class="resource-card" data-category="vpn">
-                    <h3>ProtonVPN</h3>
+                    <h3><i class="fas fa-shield-alt"></i> ProtonVPN</h3>
                     <p>Swiss-based VPN with strong privacy focus and no-logs policy. Free tier available.</p>
-                    <a href="https://protonvpn.com" target="_blank">Visit ProtonVPN →</a>
+                    <a href="https://protonvpn.com" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit ProtonVPN
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="vpn">
-                    <h3>Mullvad VPN</h3>
+                    <h3><i class="fas fa-user-secret"></i> Mullvad VPN</h3>
                     <p>Privacy-focused VPN that accepts anonymous payments and requires no email.</p>
-                    <a href="https://mullvad.net" target="_blank">Visit Mullvad →</a>
+                    <a href="https://mullvad.net" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Mullvad
+                    </a>
                 </div>
 
                 <!-- AI Resources -->
                 <div class="resource-card" data-category="ai">
-                    <h3>Privacy Guides - AI</h3>
+                    <h3><i class="fas fa-robot"></i> Privacy Guides - AI</h3>
                     <p>Guide to using AI tools while maintaining privacy and data security.</p>
-                    <a href="https://www.privacyguides.org" target="_blank">Visit Privacy Guides →</a>
+                    <a href="https://www.privacyguides.org" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Privacy Guides
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="ai">
-                    <h3>Local AI Models</h3>
+                    <h3><i class="fas fa-brain"></i> Local AI Models</h3>
                     <p>Run AI models locally without sending data to cloud services.</p>
-                    <a href="https://ollama.ai" target="_blank">Visit Ollama →</a>
+                    <a href="https://ollama.ai" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Ollama
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="ai">
-                    <h3>RedPill AI</h3>
+                    <h3><i class="fas fa-pills"></i> RedPill AI</h3>
                     <p>Privacy-focused AI platform for secure and private interactions.</p>
-                    <a href="https://www.redpill.ai/" target="_blank">Visit RedPill AI →</a>
+                    <a href="https://www.redpill.ai/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit RedPill AI
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="ai">
-                    <h3>Duck AI</h3>
+                    <h3><i class="fas fa-duck"></i> Duck AI</h3>
                     <p>Privacy-respecting AI chat from DuckDuckGo with no tracking.</p>
-                    <a href="https://duck.ai/" target="_blank">Visit Duck AI →</a>
+                    <a href="https://duck.ai/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Duck AI
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="ai">
-                    <h3>Lumo by Proton</h3>
+                    <h3><i class="fas fa-star"></i> Lumo by Proton</h3>
                     <p>Private AI assistant from Proton with end-to-end encryption.</p>
-                    <a href="https://lumo.proton.me/" target="_blank">Visit Lumo →</a>
+                    <a href="https://lumo.proton.me/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Lumo
+                    </a>
                 </div>
 
                 <!-- Browser Resources -->
                 <div class="resource-card" data-category="browser">
-                    <h3>Firefox</h3>
+                    <h3><i class="fab fa-firefox"></i> Firefox</h3>
                     <p>Open-source browser with enhanced privacy settings and tracking protection.</p>
-                    <a href="https://www.mozilla.org/firefox" target="_blank">Visit Firefox →</a>
+                    <a href="https://www.mozilla.org/firefox" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Firefox
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="browser">
-                    <h3>Brave Browser</h3>
+                    <h3><i class="fab fa-brave"></i> Brave Browser</h3>
                     <p>Privacy-focused browser with built-in ad blocking and tracker protection.</p>
-                    <a href="https://brave.com" target="_blank">Visit Brave →</a>
+                    <a href="https://brave.com" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Brave
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="browser">
-                    <h3>Tor Browser</h3>
+                    <h3><i class="fas fa-tor"></i> Tor Browser</h3>
                     <p>Anonymous browsing through the Tor network for maximum privacy.</p>
-                    <a href="https://www.torproject.org" target="_blank">Visit Tor Project →</a>
+                    <a href="https://www.torproject.org" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Tor Project
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="browser">
-                    <h3>DuckDuckGo Browser</h3>
+                    <h3><i class="fas fa-duck"></i> DuckDuckGo Browser</h3>
                     <p>Privacy browser with built-in tracker blocking and forced encryption.</p>
-                    <a href="https://duckduckgo.com/duckduckgo-help-pages/get-duckduckgo/does-duckduckgo-make-a-browser" target="_blank">Visit DuckDuckGo Browser →</a>
+                    <a href="https://duckduckgo.com/duckduckgo-help-pages/get-duckduckgo/does-duckduckgo-make-a-browser" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit DuckDuckGo Browser
+                    </a>
                 </div>
 
                 <!-- Search Engine Resources -->
                 <div class="resource-card" data-category="search">
-                    <h3>DuckDuckGo</h3>
+                    <h3><i class="fas fa-duck"></i> DuckDuckGo</h3>
                     <p>Privacy-focused search engine that doesn't track your searches.</p>
-                    <a href="https://duckduckgo.com/" target="_blank">Visit DuckDuckGo →</a>
+                    <a href="https://duckduckgo.com/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit DuckDuckGo
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="search">
-                    <h3>Brave Search</h3>
+                    <h3><i class="fab fa-brave"></i> Brave Search</h3>
                     <p>Independent search engine with no tracking or profiling.</p>
-                    <a href="https://search.brave.com/" target="_blank">Visit Brave Search →</a>
+                    <a href="https://search.brave.com/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Brave Search
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="search">
-                    <h3>Startpage</h3>
+                    <h3><i class="fas fa-search"></i> Startpage</h3>
                     <p>Private search engine that uses Google results without tracking.</p>
-                    <a href="https://www.startpage.com/" target="_blank">Visit Startpage →</a>
+                    <a href="https://www.startpage.com/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Startpage
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="search">
-                    <h3>SearXNG</h3>
+                    <h3><i class="fas fa-search-plus"></i> SearXNG</h3>
                     <p>Open-source metasearch engine with multiple instance options.</p>
-                    <a href="https://searx.space/" target="_blank">Visit SearXNG →</a>
+                    <a href="https://searx.space/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit SearXNG
+                    </a>
                 </div>
 
                 <!-- Proxy Resources -->
                 <div class="resource-card" data-category="proxy">
-                    <h3>Tor Project</h3>
+                    <h3><i class="fas fa-tor"></i> Tor Project</h3>
                     <p>Anonymous communication network for privacy and censorship resistance.</p>
-                    <a href="https://www.torproject.org" target="_blank">Visit Tor Project →</a>
+                    <a href="https://www.torproject.org" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Tor Project
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="proxy">
-                    <h3>Shadowsocks</h3>
+                    <h3><i class="fas fa-server"></i> Shadowsocks</h3>
                     <p>Secure socks5 proxy designed to protect your internet traffic.</p>
-                    <a href="https://shadowsocks.org" target="_blank">Visit Shadowsocks →</a>
+                    <a href="https://shadowsocks.org" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Shadowsocks
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="proxy">
-                    <h3>Privoxy</h3>
+                    <h3><i class="fas fa-filter"></i> Privoxy</h3>
                     <p>Non-caching web proxy with advanced filtering capabilities.</p>
-                    <a href="https://www.privoxy.org" target="_blank">Visit Privoxy →</a>
+                    <a href="https://www.privoxy.org" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Privoxy
+                    </a>
                 </div>
 
                 <!-- Encryption Resources -->
                 <div class="resource-card" data-category="encryption">
-                    <h3>ARYCRYPT</h3>
+                    <h3><i class="fas fa-file-lock"></i> ARYCRYPT</h3>
                     <p>File encryption web app that lets you encrypt any file into .ary format and decrypt it back with a password. Perfect for secure file sharing or just playing with crypto!</p>
-                    <a href="https://giriaryan694-a11y.github.io/ARYCRYPT/" target="_blank">Visit ARYCRYPT →</a>
+                    <a href="https://giriaryan694-a11y.github.io/ARYCRYPT/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit ARYCRYPT
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="encryption">
-                    <h3>ZeroTrustText</h3>
+                    <h3><i class="fas fa-key"></i> ZeroTrustText</h3>
                     <p>Secure, password-based text encryption and decryption tool for protecting sensitive messages.</p>
-                    <a href="https://giriaryan694-a11y.github.io/ZeroTrustText/" target="_blank">Visit ZeroTrustText →</a>
+                    <a href="https://giriaryan694-a11y.github.io/ZeroTrustText/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit ZeroTrustText
+                    </a>
                 </div>
 
                 <!-- Secure Deletion Resources -->
                 <div class="resource-card" data-category="secure-deletion">
-                    <h3>ARYWIPE</h3>
+                    <h3><i class="fas fa-eraser"></i> ARYWIPE</h3>
                     <p>Secure file deletion tool that permanently wipes files beyond recovery.</p>
-                    <a href="https://github.com/giriaryan694-a11y/ARYWIPE" target="_blank">Visit ARYWIPE →</a>
+                    <a href="https://github.com/giriaryan694-a11y/ARYWIPE" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit ARYWIPE
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="secure-deletion">
-                    <h3>Eraser</h3>
+                    <h3><i class="fas fa-trash-alt"></i> Eraser</h3>
                     <p>Advanced security tool for Windows that completely removes sensitive data by overwriting multiple times. Free and open-source.</p>
-                    <a href="https://eraser.heidi.ie/" target="_blank">Visit Eraser →</a>
+                    <a href="https://eraser.heidi.ie/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Eraser
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="secure-deletion">
-                    <h3>SDelete</h3>
+                    <h3><i class="fas fa-broom"></i> SDelete</h3>
                     <p>Microsoft's DoD-compliant secure delete tool from Sysinternals for Windows systems.</p>
-                    <a href="https://learn.microsoft.com/en-us/sysinternals/downloads/sdelete" target="_blank">Visit SDelete →</a>
+                    <a href="https://learn.microsoft.com/en-us/sysinternals/downloads/sdelete" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit SDelete
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="secure-deletion">
-                    <h3>File Shredder</h3>
+                    <h3><i class="fas fa-cut"></i> File Shredder</h3>
                     <p>Free tool for securely erasing files and wiping free disk space with government-approved algorithms.</p>
-                    <a href="https://www.fileshredder.org/" target="_blank">Visit File Shredder →</a>
+                    <a href="https://www.fileshredder.org/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit File Shredder
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="secure-deletion">
-                    <h3>BleachBit</h3>
+                    <h3><i class="fas fa-soap"></i> BleachBit</h3>
                     <p>Free open-source disk space cleaner and privacy manager that securely shreds files.</p>
-                    <a href="https://www.bleachbit.org/" target="_blank">Visit BleachBit →</a>
+                    <a href="https://www.bleachbit.org/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit BleachBit
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="secure-deletion">
-                    <h3>CCleaner</h3>
+                    <h3><i class="fas fa-broom"></i> CCleaner</h3>
                     <p>Popular cleaning tool with secure file deletion features using multiple overwrite passes.</p>
-                    <a href="https://www.ccleaner.com/" target="_blank">Visit CCleaner →</a>
+                    <a href="https://www.ccleaner.com/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit CCleaner
+                    </a>
                 </div>
 
                 <!-- Password Manager Resources -->
                 <div class="resource-card" data-category="password">
-                    <h3>Bitwarden</h3>
+                    <h3><i class="fas fa-key"></i> Bitwarden</h3>
                     <p>Open-source password manager with end-to-end encryption.</p>
-                    <a href="https://bitwarden.com" target="_blank">Visit Bitwarden →</a>
+                    <a href="https://bitwarden.com" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Bitwarden
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="password">
-                    <h3>KeePassXC</h3>
+                    <h3><i class="fas fa-database"></i> KeePassXC</h3>
                     <p>Cross-platform, offline password manager for maximum security.</p>
-                    <a href="https://keepassxc.org" target="_blank">Visit KeePassXC →</a>
+                    <a href="https://keepassxc.org" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit KeePassXC
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="password">
-                    <h3>Proton Pass</h3>
+                    <h3><i class="fas fa-user-lock"></i> Proton Pass</h3>
                     <p>End-to-end encrypted password manager from Proton with secure sharing.</p>
-                    <a href="https://proton.me/pass" target="_blank">Visit Proton Pass →</a>
+                    <a href="https://proton.me/pass" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Proton Pass
+                    </a>
                 </div>
 
                 <!-- Communications Over Internet Resources -->
                 <div class="resource-card" data-category="comms-internet">
-                    <h3>Signal</h3>
+                    <h3><i class="fas fa-comment-alt"></i> Signal</h3>
                     <p>End-to-end encrypted messaging app with open-source code and strong privacy.</p>
-                    <a href="https://signal.org/" target="_blank">Visit Signal →</a>
+                    <a href="https://signal.org/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Signal
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="comms-internet">
-                    <h3>Session</h3>
+                    <h3><i class="fas fa-message"></i> Session</h3>
                     <p>Private messenger with no phone number required, built on decentralized network.</p>
-                    <a href="https://getsession.org/" target="_blank">Visit Session →</a>
+                    <a href="https://getsession.org/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Session
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="comms-internet">
-                    <h3>Briar</h3>
+                    <h3><i class="fas fa-leaf"></i> Briar</h3>
                     <p>Secure messaging app designed for activists and journalists, works via Tor.</p>
-                    <a href="https://briarproject.org/" target="_blank">Visit Briar →</a>
+                    <a href="https://briarproject.org/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Briar
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="comms-internet">
-                    <h3>Threema</h3>
+                    <h3><i class="fas fa-comments"></i> Threema</h3>
                     <p>Swiss-made secure messenger with no phone number or email required.</p>
-                    <a href="https://threema.com/" target="_blank">Visit Threema →</a>
+                    <a href="https://threema.com/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Threema
+                    </a>
                 </div>
 
                 <!-- Communications Over Local Network Resources -->
                 <div class="resource-card" data-category="comms-local">
-                    <h3>BitChat</h3>
+                    <h3><i class="fas fa-network-wired"></i> BitChat</h3>
                     <p>Secure peer-to-peer instant messenger for local network communication.</p>
-                    <a href="https://bitchat.im/" target="_blank">Visit BitChat →</a>
+                    <a href="https://bitchat.im/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit BitChat
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="comms-local">
-                    <h3>Briar</h3>
+                    <h3><i class="fas fa-leaf"></i> Briar</h3>
                     <p>Mesh networking capable secure messenger that works without internet via Bluetooth and Wi-Fi.</p>
-                    <a href="https://briarproject.org/" target="_blank">Visit Briar →</a>
+                    <a href="https://briarproject.org/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Briar
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="comms-local">
-                    <h3>Bridgefy</h3>
+                    <h3><i class="fas fa-bluetooth"></i> Bridgefy</h3>
                     <p>Offline messaging app using Bluetooth mesh network for internet-free communication.</p>
-                    <a href="https://bridgefy.me/" target="_blank">Visit Bridgefy →</a>
+                    <a href="https://bridgefy.me/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Bridgefy
+                    </a>
                 </div>
 
                 <!-- Email Resources -->
                 <div class="resource-card" data-category="email">
-                    <h3>Proton Mail</h3>
+                    <h3><i class="fas fa-envelope"></i> Proton Mail</h3>
                     <p>End-to-end encrypted email service based in Switzerland.</p>
-                    <a href="https://mail.proton.me/" target="_blank">Visit Proton Mail →</a>
+                    <a href="https://mail.proton.me/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Proton Mail
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="email">
-                    <h3>Tuta Mail</h3>
+                    <h3><i class="fas fa-envelope-open"></i> Tuta Mail</h3>
                     <p>Secure email with automatic end-to-end encryption.</p>
-                    <a href="https://tuta.com/" target="_blank">Visit Tuta →</a>
+                    <a href="https://tuta.com/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Tuta
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="email">
-                    <h3>Guerrilla Mail</h3>
+                    <h3><i class="fas fa-envelope-square"></i> Guerrilla Mail</h3>
                     <p>Disposable temporary email address for privacy protection.</p>
-                    <a href="https://www.guerrillamail.com/" target="_blank">Visit Guerrilla Mail →</a>
+                    <a href="https://www.guerrillamail.com/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Guerrilla Mail
+                    </a>
                 </div>
 
                 <!-- BIOS/Firmware Resources -->
                 <div class="resource-card" data-category="bios">
-                    <h3>Coreboot</h3>
+                    <h3><i class="fas fa-microchip"></i> Coreboot</h3>
                     <p>Fast, lightweight open-source firmware with excellent boot speed and enhanced security. Pros: Verified boot, broad hardware support. Cons: Often requires proprietary blobs for modern hardware.</p>
-                    <a href="https://www.coreboot.org/" target="_blank">Visit Coreboot →</a>
+                    <a href="https://www.coreboot.org/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Coreboot
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="bios">
-                    <h3>Libreboot</h3>
+                    <h3><i class="fas fa-freedom"></i> Libreboot</h3>
                     <p>Coreboot variant with strict free software focus, removing all proprietary blobs. Pros: Maximum software freedom, no backdoors. Cons: Limited to older hardware, smaller device support.</p>
-                    <a href="https://libreboot.org/" target="_blank">Visit Libreboot →</a>
+                    <a href="https://libreboot.org/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Libreboot
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="bios">
-                    <h3>Heads</h3>
+                    <h3><i class="fas fa-head-side"></i> Heads</h3>
                     <p>Security-focused firmware using Coreboot as base with TPM and USB security key support. Pros: Trusted boot environment. Cons: Complex setup, requires compatible hardware, best with QubesOS.</p>
-                    <a href="https://osresearch.net/" target="_blank">Visit Heads →</a>
+                    <a href="https://osresearch.net/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Heads
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="bios">
-                    <h3>Dasharo</h3>
+                    <h3><i class="fas fa-rocket"></i> Dasharo</h3>
                     <p>Coreboot distribution for modern platforms with focus on security and long-term maintenance. Pros: Modern device support, vendor-backed. Cons: Primarily for new purpose-built hardware.</p>
-                    <a href="https://dasharo.com/" target="_blank">Visit Dasharo →</a>
+                    <a href="https://dasharo.com/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Dasharo
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="bios">
-                    <h3>System76 Open Firmware</h3>
+                    <h3><i class="fas fa-laptop"></i> System76 Open Firmware</h3>
                     <p>Coreboot distribution for System76 hardware with excellent integration. Pros: Perfect compatibility with System76 devices. Cons: Only for System76 hardware.</p>
-                    <a href="https://github.com/system76/firmware-open" target="_blank">Visit System76 Firmware →</a>
+                    <a href="https://github.com/system76/firmware-open" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit System76 Firmware
+                    </a>
                 </div>
 
                 <!-- Private Banking Resources -->
                 <div class="resource-card" data-category="bank">
-                    <h3>Pictet Group</h3>
+                    <h3><i class="fas fa-university"></i> Pictet Group</h3>
                     <p>Swiss private bank with over 200 years of tradition in wealth management and asset protection.</p>
-                    <a href="https://www.pictet.com" target="_blank">Visit Pictet Group →</a>
+                    <a href="https://www.pictet.com" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Pictet Group
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="bank">
-                    <h3>Lombard Odier</h3>
+                    <h3><i class="fas fa-landmark"></i> Lombard Odier</h3>
                     <p>Independent Swiss private bank offering wealth and asset management services since 1796.</p>
-                    <a href="https://www.lombardodier.com" target="_blank">Visit Lombard Odier →</a>
+                    <a href="https://www.lombardodier.com" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Lombard Odier
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="bank">
-                    <h3>Julius Baer</h3>
+                    <h3><i class="fas fa-building"></i> Julius Baer</h3>
                     <p>Leading Swiss wealth management group focused on private banking and asset management.</p>
-                    <a href="https://www.juliusbaer.com" target="_blank">Visit Julius Baer →</a>
+                    <a href="https://www.juliusbaer.com" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Julius Baer
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="bank">
-                    <h3>Vontobel</h3>
+                    <h3><i class="fas fa-piggy-bank"></i> Vontobel</h3>
                     <p>Swiss private bank specializing in wealth management, investment banking, and asset management.</p>
-                    <a href="https://www.vontobel.com" target="_blank">Visit Vontobel →</a>
+                    <a href="https://www.vontobel.com" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Vontobel
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="bank">
-                    <h3>Zürcher Kantonalbank (ZKB)</h3>
+                    <h3><i class="fas fa-bank"></i> Zürcher Kantonalbank (ZKB)</h3>
                     <p>Cantonal bank of Zürich offering comprehensive banking services with strong regional presence.</p>
-                    <a href="https://www.zkb.ch" target="_blank">Visit ZKB →</a>
+                    <a href="https://www.zkb.ch" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit ZKB
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="bank">
-                    <h3>Banque Cantonale Vaudoise (BCV)</h3>
+                    <h3><i class="fas fa-building-columns"></i> Banque Cantonale Vaudoise (BCV)</h3>
                     <p>Cantonal bank serving the Vaud region with full-service banking solutions.</p>
-                    <a href="https://www.bcv.ch" target="_blank">Visit BCV →</a>
+                    <a href="https://www.bcv.ch" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit BCV
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="bank">
-                    <h3>PostFinance</h3>
+                    <h3><i class="fas fa-mail-bulk"></i> PostFinance</h3>
                     <p>Swiss Post's financial services provider offering secure banking for individuals and businesses.</p>
-                    <a href="https://www.postfinance.ch" target="_blank">Visit PostFinance →</a>
+                    <a href="https://www.postfinance.ch" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit PostFinance
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="bank">
-                    <h3>Migros Bank</h3>
+                    <h3><i class="fas fa-store"></i> Migros Bank</h3>
                     <p>Retail bank from the Migros Group providing accessible banking services across Switzerland.</p>
-                    <a href="https://www.migrosbank.ch" target="_blank">Visit Migros Bank →</a>
+                    <a href="https://www.migrosbank.ch" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Migros Bank
+                    </a>
                 </div>
 
                 <!-- Cryptocurrency Resources -->
                 <div class="resource-card" data-category="crypto">
-                    <h3>Monero (XMR)</h3>
+                    <h3><i class="fas fa-coins"></i> Monero (XMR)</h3>
                     <p>Mandatory privacy for all transactions using Ring Signatures, Stealth Addresses, and RingCT. Highly resistant to blockchain analysis with built-in fungibility.</p>
-                    <a href="https://www.getmonero.org" target="_blank">Visit Monero →</a>
+                    <a href="https://www.getmonero.org" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Monero
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="crypto">
-                    <h3>Zcash (ZEC)</h3>
+                    <h3><i class="fas fa-shield-alt"></i> Zcash (ZEC)</h3>
                     <p>Optional privacy using zk-SNARKs for shielded transactions. Mathematically provable technology allowing selective privacy for regulatory compliance.</p>
-                    <a href="https://z.cash" target="_blank">Visit Zcash →</a>
+                    <a href="https://z.cash" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Zcash
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="crypto">
-                    <h3>Firo (FIRO)</h3>
+                    <h3><i class="fas fa-bolt"></i> Firo (FIRO)</h3>
                     <p>Uses Lelantus Spark protocol to burn and redeem coins with no transaction history. Includes Dandelion++ protocol to hide IP addresses.</p>
-                    <a href="https://firo.org" target="_blank">Visit Firo →</a>
+                    <a href="https://firo.org" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Firo
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="crypto">
-                    <h3>Secret Network (SCRT)</h3>
+                    <h3><i class="fas fa-user-secret"></i> Secret Network (SCRT)</h3>
                     <p>Privacy blockchain with secret smart contracts for private dApps. Extends privacy beyond transactions to encrypted data and applications.</p>
-                    <a href="https://scrt.network" target="_blank">Visit Secret Network →</a>
+                    <a href="https://scrt.network" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Secret Network
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="crypto">
-                    <h3>Dash (DASH)</h3>
+                    <h3><i class="fas fa-rocket"></i> Dash (DASH)</h3>
                     <p>Fast digital cash with optional PrivateSend feature using CoinJoin mixing. User-friendly for everyday payments with optional privacy.</p>
-                    <a href="https://www.dash.org/" target="_blank">Visit Dash →</a>
+                    <a href="https://www.dash.org/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Dash
+                    </a>
                 </div>
 
                 <!-- Email Masking Resources -->
                 <div class="resource-card" data-category="email-masking">
-                    <h3>DuckDuckGo Email Protection</h3>
+                    <h3><i class="fas fa-duck"></i> DuckDuckGo Email Protection</h3>
                     <p>Free email forwarding service that removes trackers from emails.</p>
-                    <a href="https://duckduckgo.com/email/login" target="_blank">Visit Duck Email →</a>
+                    <a href="https://duckduckgo.com/email/login" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Duck Email
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="email-masking">
-                    <h3>SimpleLogin</h3>
+                    <h3><i class="fas fa-envelope"></i> SimpleLogin</h3>
                     <p>Open-source email alias service to protect your real email address.</p>
-                    <a href="https://simplelogin.io/" target="_blank">Visit SimpleLogin →</a>
+                    <a href="https://simplelogin.io/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit SimpleLogin
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="email-masking">
-                    <h3>Firefox Relay</h3>
+                    <h3><i class="fab fa-firefox"></i> Firefox Relay</h3>
                     <p>Email masking service from Mozilla to hide your real email.</p>
-                    <a href="https://relay.firefox.com/" target="_blank">Visit Firefox Relay →</a>
+                    <a href="https://relay.firefox.com/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Firefox Relay
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="email-masking">
-                    <h3>Addy.io</h3>
+                    <h3><i class="fas fa-at"></i> Addy.io</h3>
                     <p>Anonymous email forwarding service with unlimited aliases.</p>
-                    <a href="https://addy.io/" target="_blank">Visit Addy.io →</a>
+                    <a href="https://addy.io/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Addy.io
+                    </a>
                 </div>
 
                 <!-- Disposable Email Resources -->
                 <div class="resource-card" data-category="disposable">
-                    <h3>10 Minute Mail</h3>
+                    <h3><i class="fas fa-clock"></i> 10 Minute Mail</h3>
                     <p>Temporary email that self-destructs after 10 minutes.</p>
-                    <a href="https://10minutemail.com/" target="_blank">Visit 10 Minute Mail →</a>
+                    <a href="https://10minutemail.com/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit 10 Minute Mail
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="disposable">
-                    <h3>Temp Mail</h3>
+                    <h3><i class="fas fa-hourglass-half"></i> Temp Mail</h3>
                     <p>Disposable temporary email address to avoid spam.</p>
-                    <a href="https://temp-mail.org/" target="_blank">Visit Temp Mail →</a>
+                    <a href="https://temp-mail.org/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Temp Mail
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="disposable">
-                    <h3>Guerrilla Mail</h3>
+                    <h3><i class="fas fa-envelope-square"></i> Guerrilla Mail</h3>
                     <p>Anonymous disposable email for receiving messages.</p>
-                    <a href="https://www.guerrillamail.com/" target="_blank">Visit Guerrilla Mail →</a>
+                    <a href="https://www.guerrillamail.com/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Guerrilla Mail
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="disposable">
-                    <h3>Mailinator</h3>
+                    <h3><i class="fas fa-inbox"></i> Mailinator</h3>
                     <p>Public inbox system for temporary email receiving.</p>
-                    <a href="https://www.mailinator.com/" target="_blank">Visit Mailinator →</a>
+                    <a href="https://www.mailinator.com/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Mailinator
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="disposable">
-                    <h3>MailDrop</h3>
+                    <h3><i class="fas fa-envelope-open-text"></i> MailDrop</h3>
                     <p>Free disposable email addresses for avoiding spam without registration.</p>
-                    <a href="https://maildrop.cc/" target="_blank">Visit MailDrop →</a>
+                    <a href="https://maildrop.cc/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit MailDrop
+                    </a>
                 </div>
 
                 <!-- Temporary Phone Number Resources -->
                 <div class="resource-card" data-category="temp-phone">
-                    <h3>OnlineSim</h3>
+                    <h3><i class="fas fa-sim-card"></i> OnlineSim</h3>
                     <p>Virtual phone numbers to receive SMS from various countries for account verification without revealing real numbers.</p>
-                    <a href="https://onlinesim.net/" target="_blank">Visit OnlineSim →</a>
+                    <a href="https://onlinesim.net/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit OnlineSim
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="temp-phone">
-                    <h3>DoNotPay</h3>
+                    <h3><i class="fas fa-gavel"></i> DoNotPay</h3>
                     <p>Temporary phone numbers for bypassing phone verification on websites while maintaining privacy.</p>
-                    <a href="https://donotpay.com/learn/temporary-phone-number/" target="_blank">Visit DoNotPay →</a>
+                    <a href="https://donotpay.com/learn/temporary-phone-number/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit DoNotPay
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="temp-phone">
-                    <h3>HS3X</h3>
+                    <h3><i class="fas fa-phone-alt"></i> HS3X</h3>
                     <p>Temporary, disposable phone numbers for receiving SMS online for verification processes.</p>
-                    <a href="https://hs3x.com/" target="_blank">Visit HS3X →</a>
+                    <a href="https://hs3x.com/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit HS3X
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="temp-phone">
-                    <h3>Free SMS Verification</h3>
+                    <h3><i class="fas fa-sms"></i> Free SMS Verification</h3>
                     <p>Disposable phone numbers to bypass SMS verifications without revealing personal information.</p>
-                    <a href="http://freesmsverification.com/" target="_blank">Visit Free SMS Verification →</a>
+                    <a href="http://freesmsverification.com/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Free SMS Verification
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="temp-phone">
-                    <h3>SMS to Me</h3>
+                    <h3><i class="fas fa-mobile-alt"></i> SMS to Me</h3>
                     <p>Service for receiving SMS online with temporary phone numbers for privacy and verification.</p>
-                    <a href="https://smstome.com/" target="_blank">Visit SMS to Me →</a>
+                    <a href="https://smstome.com/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit SMS to Me
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="temp-phone">
-                    <h3>Twilio</h3>
+                    <h3><i class="fas fa-phone-square"></i> Twilio</h3>
                     <p>Cloud communications platform for making and receiving calls and texts with disposable numbers.</p>
-                    <a href="https://www.twilio.com/" target="_blank">Visit Twilio →</a>
+                    <a href="https://www.twilio.com/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Twilio
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="temp-phone">
-                    <h3>IntelTechniques VoIP Suite</h3>
+                    <h3><i class="fas fa-voicemail"></i> IntelTechniques VoIP Suite</h3>
                     <p>Collection of tools and resources for using VoIP services securely for anonymous phone lines.</p>
-                    <a href="https://inteltechniques.com/voip.suite.html" target="_blank">Visit VoIP Suite →</a>
+                    <a href="https://inteltechniques.com/voip.suite.html" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit VoIP Suite
+                    </a>
                 </div>
 
                 <!-- Anonymous SMS Services Resources -->
                 <div class="resource-card" data-category="anonymous-sms">
-                    <h3>Globfone</h3>
+                    <h3><i class="fas fa-globe"></i> Globfone</h3>
                     <p>Free service for sending text messages globally without using a personal phone number.</p>
-                    <a href="https://globfone.com/send-text/" target="_blank">Visit Globfone →</a>
+                    <a href="https://globfone.com/send-text/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Globfone
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="anonymous-sms">
-                    <h3>SendAText</h3>
+                    <h3><i class="fas fa-paper-plane"></i> SendAText</h3>
                     <p>Send free text messages online to various countries for anonymous communication.</p>
-                    <a href="https://www.sendatext.co/" target="_blank">Visit SendAText →</a>
+                    <a href="https://www.sendatext.co/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit SendAText
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="anonymous-sms">
-                    <h3>FaxZero</h3>
+                    <h3><i class="fas fa-fax"></i> FaxZero</h3>
                     <p>Send free faxes online for sending documents anonymously without a fax machine.</p>
-                    <a href="https://faxzero.com/" target="_blank">Visit FaxZero →</a>
+                    <a href="https://faxzero.com/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit FaxZero
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="anonymous-sms">
-                    <h3>Amazon SNS</h3>
-                    <p>Fully managed pub/sub messaging and mobile notifications service for coordinating message delivery.</p>
-                    <a href="https://aws.amazon.com/sns/" target="_blank">Visit Amazon SNS →</a>
+                    <h3><i class="fab fa-aws"></i> Amazon SNS</h3>
+                    <p>Fully managed pub/sub messaging and mobile notifications service for coordinating the delivery of messages to subscribing endpoints and clients, beneficial for automated notifications in OSINT operations.</p>
+                    <a href="https://aws.amazon.com/sns/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Amazon SNS
+                    </a>
                 </div>
 
                 <!-- OS Resources -->
                 <div class="resource-card" data-category="os">
-                    <h3>Tails OS</h3>
+                    <h3><i class="fas fa-linux"></i> Tails OS</h3>
                     <p>Privacy-focused Linux distribution that leaves no trace.</p>
-                    <a href="https://tails.boum.org" target="_blank">Visit Tails →</a>
+                    <a href="https://tails.boum.org" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Tails
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="os">
-                    <h3>Qubes OS</h3>
+                    <h3><i class="fas fa-cube"></i> Qubes OS</h3>
                     <p>Security-focused operating system using virtualization.</p>
-                    <a href="https://www.qubes-os.org" target="_blank">Visit Qubes OS →</a>
+                    <a href="https://www.qubes-os.org" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Qubes OS
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="os">
-                    <h3>GrapheneOS</h3>
+                    <h3><i class="fas fa-mobile"></i> GrapheneOS</h3>
                     <p>Privacy and security-focused mobile operating system.</p>
-                    <a href="https://grapheneos.org" target="_blank">Visit GrapheneOS →</a>
+                    <a href="https://grapheneos.org" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit GrapheneOS
+                    </a>
                 </div>
 
                 <div class="resource-card" data-category="os">
-                    <h3>Parrot Security OS</h3>
+                    <h3><i class="fas fa-parrot"></i> Parrot Security OS</h3>
                     <p>Security and privacy-oriented Linux distribution for penetration testing and development.</p>
-                    <a href="https://parrotsec.org/download/" target="_blank">Visit Parrot OS →</a>
+                    <a href="https://parrotsec.org/download/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Parrot OS
+                    </a>
                 </div>
+
+                <!-- VoIP Services -->
+                <div class="resource-card" data-category="voip">
+                    <h3><i class="fas fa-phone-alt"></i> IntelTechniques VoIP Suite</h3>
+                    <p>A collection of tools and resources for using VoIP services securely, ideal for creating anonymous phone lines for investigations.</p>
+                    <a href="https://inteltechniques.com/voip.suite.html" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit VoIP Suite
+                    </a>
+                </div>
+
+                <div class="resource-card" data-category="voip">
+                    <h3><i class="fas fa-terminal"></i> IntelTechniques Twilio CLI</h3>
+                    <p>Provides guidance on using Twilio's Command Line Interface for creating and managing VoIP services, a versatile tool for OSINT practitioners needing temporary phone solutions.</p>
+                    <a href="https://inteltechniques.com/voip.twilio.cli.html" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Twilio CLI Guide
+                    </a>
+                </div>
+
+                <div class="resource-card" data-category="voip">
+                    <h3><i class="fas fa-shield-alt"></i> Threader on VoIP Security</h3>
+                    <p>A Twitter thread that discusses the importance of securing VoIP communications, particularly relevant for OSINT practitioners who rely on these technologies for anonymous interactions.</p>
+                    <a href="https://threader.app/thread/1199785692274077696" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Read Thread
+                    </a>
+                </div>
+
+                <!-- Username Generators -->
+                <div class="resource-card" data-category="username-gen">
+                    <h3><i class="fas fa-user-tag"></i> LastPass Username Generator</h3>
+                    <p>Creates complex usernames to enhance online security, useful for creating accounts where identity protection is key.</p>
+                    <a href="https://www.lastpass.com/features/username-generator" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit LastPass
+                    </a>
+                </div>
+
+                <div class="resource-card" data-category="username-gen">
+                    <h3><i class="fas fa-user-tag"></i> Behind the Name Random Generator</h3>
+                    <p>Produces names from various cultures and eras, handy for creating believable characters or user profiles.</p>
+                    <a href="https://www.behindthename.com/random/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Behind the Name
+                    </a>
+                </div>
+
+                <!-- Identity Generators -->
+                <div class="resource-card" data-category="identity-gen">
+                    <h3><i class="fas fa-id-card"></i> Fake Name Generator</h3>
+                    <p>Offers detailed fake identities including names, addresses, and more, ideal for online registrations without revealing true identity.</p>
+                    <a href="https://www.fakenamegenerator.com/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Fake Name Generator
+                    </a>
+                </div>
+
+                <div class="resource-card" data-category="identity-gen">
+                    <h3><i class="fas fa-id-card"></i> ElfQrin Fake ID Generator</h3>
+                    <p>A comprehensive tool for generating fake identities, including names, addresses, credit card numbers, and more, for a variety of testing scenarios.</p>
+                    <a href="https://www.elfqrin.com/fakeid.php" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit ElfQrin
+                    </a>
+                </div>
+
+                <div class="resource-card" data-category="identity-gen">
+                    <h3><i class="fas fa-id-card"></i> FauxID.com Tools</h3>
+                    <p>A suite of tools for generating fake identities, addresses, phone numbers, and more, supporting a wide range of privacy and testing needs.</p>
+                    <a href="https://fauxid.com/tools" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit FauxID
+                    </a>
+                </div>
+
+                <!-- Document Generators -->
+                <div class="resource-card" data-category="document-gen">
+                    <h3><i class="fas fa-file-alt"></i> This Resume Does Not Exist</h3>
+                    <p>Generates fictional resumes for a variety of job roles, useful for testing or as placeholders.</p>
+                    <a href="https://thisresumedoesnotexist.com/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Resume Generator
+                    </a>
+                </div>
+
+                <div class="resource-card" data-category="document-gen">
+                    <h3><i class="fas fa-file-alt"></i> Resume Builder by Vinay Somawat</h3>
+                    <p>An interactive tool for creating professional-looking resumes quickly and easily, ideal for generating realistic job applicant data.</p>
+                    <a href="https://vinaysomawat.github.io/Resume-Builder/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Resume Builder
+                    </a>
+                </div>
+
+                <div class="resource-card" data-category="document-gen">
+                    <h3><i class="fas fa-file-alt"></i> This Rental Does Not Exist</h3>
+                    <p>Generates fictional rental listings with photos, useful for testing real estate platforms.</p>
+                    <a href="https://thisrentaldoesnotexist.com/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Rental Generator
+                    </a>
+                </div>
+
+                <!-- ID Validators -->
+                <div class="resource-card" data-category="id-validators">
+                    <h3><i class="fas fa-check-circle"></i> Credit Card Validator (Fake Name Generator)</h3>
+                    <p>Validates credit card numbers for testing e-commerce platforms or payment forms.</p>
+                    <a href="https://www.fakenamegenerator.com/credit-card-validator.php" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Credit Card Validator
+                    </a>
+                </div>
+
+                <div class="resource-card" data-category="id-validators">
+                    <h3><i class="fas fa-check-circle"></i> ABA Validator</h3>
+                    <p>Validates American Bankers Association routing numbers, essential for testing financial applications.</p>
+                    <a href="https://www.fakenamegenerator.com/aba-validator.php" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit ABA Validator
+                    </a>
+                </div>
+
+                <!-- Unique ID Generators -->
+                <div class="resource-card" data-category="unique-id-gen">
+                    <h3><i class="fas fa-fingerprint"></i> IID Generator by Georgy Bu</h3>
+                    <p>A tool for generating unique instance identifiers, useful for software development and testing database uniqueness.</p>
+                    <a href="https://georgybu.github.io/IID_Generator/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit IID Generator
+                    </a>
+                </div>
+
+                <div class="resource-card" data-category="unique-id-gen">
+                    <h3><i class="fas fa-fingerprint"></i> ShortGUID by Richard Kundl</h3>
+                    <p>Provides a method to generate shortened, unique GUIDs, optimizing space in databases or for use in URLs.</p>
+                    <a href="https://richardkundl.github.io/shortguid/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit ShortGUID
+                    </a>
+                </div>
+
+                <div class="resource-card" data-category="unique-id-gen">
+                    <h3><i class="fas fa-fingerprint"></i> Nano ID by Zelark</h3>
+                    <p>An ultrafast, secure URL-friendly unique string ID generator, perfect for web development and ensuring collision-free identifiers.</p>
+                    <a href="https://zelark.github.io/nano-id-cc/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Nano ID
+                    </a>
+                </div>
+
+                <!-- National ID Generators -->
+                <div class="resource-card" data-category="id-validators">
+                    <h3><i class="fas fa-passport"></i> WPIMEI Generator</h3>
+                    <p>Creates random but valid IMEI numbers for mobile devices, useful for testing mobile applications or services.</p>
+                    <a href="https://wpimeigenerator.github.io/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit WPIMEI Generator
+                    </a>
+                </div>
+
+                <div class="resource-card" data-category="id-validators">
+                    <h3><i class="fas fa-passport"></i> DYRK IMEI Tools</h3>
+                    <p>Another tool for generating and validating IMEI numbers, supporting developers and testers in mobile ecosystem.</p>
+                    <a href="https://dyrk.org/tools/imei/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit DYRK IMEI Tools
+                    </a>
+                </div>
+
+                <div class="resource-card" data-category="id-validators">
+                    <h3><i class="fas fa-passport"></i> ElfQrin US SSN & Driver License ID Generator</h3>
+                    <p>Generates fake US Social Security Numbers and Driver's Licenses, useful for verification or testing purposes.</p>
+                    <a href="https://www.elfqrin.com/usssndriverlicenseidgen.php" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit ElfQrin ID Generator
+                    </a>
+                </div>
+
+                <div class="resource-card" data-category="id-validators">
+                    <h3><i class="fas fa-passport"></i> Washington Drivers License Generator</h3>
+                    <p>Creates fake Washington state driver's licenses, suitable for testing form inputs or verification systems.</p>
+                    <a href="https://mmarvick.github.io/wa-drivers-license/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit WA License Generator
+                    </a>
+                </div>
+
+                <div class="resource-card" data-category="id-validators">
+                    <h3><i class="fas fa-passport"></i> FakeInfo Drivers License Generator</h3>
+                    <p>Offers a tool to generate drivers' licenses for multiple states, ideal for UI testing or mock-ups.</p>
+                    <a href="https://fakeinfo.net/drivers-license-generator" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit FakeInfo License Generator
+                    </a>
+                </div>
+
+                <div class="resource-card" data-category="id-validators">
+                    <h3><i class="fas fa-passport"></i> Generate SA ID Numbers</h3>
+                    <p>Creates valid South African ID numbers, useful for testing forms and databases requiring this specific national identifier.</p>
+                    <a href="https://chris927.github.io/generate-sa-idnumbers/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit SA ID Generator
+                    </a>
+                </div>
+
+                <div class="resource-card" data-category="id-validators">
+                    <h3><i class="fas fa-passport"></i> SSN Generator by Steve Morse</h3>
+                    <p>A simple tool for generating random Social Security Numbers, aiding in privacy protection during tests and verifications.</p>
+                    <a href="https://stevemorse.org/ssn/ssn.html" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit SSN Generator
+                    </a>
+                </div>
+
+                <div class="resource-card" data-category="id-validators">
+                    <h3><i class="fas fa-passport"></i> Driver's License Generator by Steve Morse</h3>
+                    <p>Offers a method to create plausible driver's license numbers for various states, useful for application testing and form validations.</p>
+                    <a href="https://stevemorse.org/dl/dl.html" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit DL Generator
+                    </a>
+                </div>
+
+                <div class="resource-card" data-category="id-validators">
+                    <h3><i class="fas fa-passport"></i> Social Insurance Number Generator</h3>
+                    <p>Generates fake Canadian Social Insurance Numbers, useful for testing forms that require this information.</p>
+                    <a href="https://www.fakenamegenerator.com/social-insurance-number.php" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit SIN Generator
+                    </a>
+                </div>
+
+                <div class="resource-card" data-category="id-validators">
+                    <h3><i class="fas fa-passport"></i> Vehicle Identification Number Generator</h3>
+                    <p>Creates fake VINs, aiding in automotive-related testing or database mock-ups.</p>
+                    <a href="https://www.fakenamegenerator.com/vehicle-identification-number.php" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit VIN Generator
+                    </a>
+                </div>
+
+                <div class="resource-card" data-category="id-validators">
+                    <h3><i class="fas fa-passport"></i> National Insurance Number Generator</h3>
+                    <p>Generates UK National Insurance numbers for testing purposes.</p>
+                    <a href="https://www.fakenamegenerator.com/national-insurance-number.php" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit NI Number Generator
+                    </a>
+                </div>
+
+                <div class="resource-card" data-category="id-validators">
+                    <h3><i class="fas fa-passport"></i> Social Security Number Generator (Fake Name Generator)</h3>
+                    <p>Facilitates the generation of fake US Social Security Numbers, aiding users in testing without using genuine identifiers.</p>
+                    <a href="https://www.fakenamegenerator.com/social-security-number.php" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit SSN Generator
+                    </a>
+                </div>
+
+                <!-- AI Face Generators -->
+                <div class="resource-card" data-category="ai-face-gen">
+                    <h3><i class="fas fa-user-circle"></i> This Person Does Not Exist</h3>
+                    <p>Creates photorealistic faces using AI, perfect for generating anonymous profile pictures or characters.</p>
+                    <a href="https://thispersondoesnotexist.com/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit This Person Does Not Exist
+                    </a>
+                </div>
+
+                <div class="resource-card" data-category="ai-face-gen">
+                    <h3><i class="fas fa-user-circle"></i> Random Face Generator (FakeInfo)</h3>
+                    <p>Another tool for generating AI-generated faces, enhancing anonymity in online profiles.</p>
+                    <a href="https://fakeinfo.net/random-face-generator" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Random Face Generator
+                    </a>
+                </div>
+
+                <!-- Social Profile Generators -->
+                <div class="resource-card" data-category="social-profile-gen">
+                    <h3><i class="fas fa-share-alt"></i> Dating Profile Generator</h3>
+                    <p>Automatically generates profiles for dating websites, including biographies and conversations, ideal for creating realistic test profiles.</p>
+                    <a href="https://www.dating-profile-generator.org.uk/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Dating Profile Generator
+                    </a>
+                </div>
+
+                <div class="resource-card" data-category="social-profile-gen">
+                    <h3><i class="fab fa-twitter"></i> Fake Twitter Profile Generator</h3>
+                    <p>Creates Twitter profiles complete with bios, tweets, and followers, useful for social media research and mock-ups.</p>
+                    <a href="https://fakeinfo.net/fake-twitter-profile-generator" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Twitter Profile Generator
+                    </a>
+                </div>
+
+                <div class="resource-card" data-category="social-profile-gen">
+                    <h3><i class="fab fa-tiktok"></i> Fake TikTok Profile Generator</h3>
+                    <p>Offers a tool to create TikTok profiles, aiding in the design of social media campaigns or research without using real accounts.</p>
+                    <a href="https://fakeinfo.net/fake-tiktok-profile-gererator" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit TikTok Profile Generator
+                    </a>
+                </div>
+
+                <div class="resource-card" data-category="social-profile-gen">
+                    <h3><i class="fab fa-youtube"></i> Fake YouTube Channel Generator</h3>
+                    <p>Generates YouTube channel descriptions, including subscriber counts and video statistics, for mock-ups or research.</p>
+                    <a href="https://fakeinfo.net/fake-youtube-channel-generator" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit YouTube Channel Generator
+                    </a>
+                </div>
+
+                <!-- Company Generators -->
+                <div class="resource-card" data-category="profile-gen">
+                    <h3><i class="fas fa-building"></i> Company Name Generator (FakeInfo)</h3>
+                    <p>Generates business names, suitable for brainstorming startup ideas or for use in mock-ups and presentations.</p>
+                    <a href="https://fakeinfo.net/company-name-generator" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Company Name Generator
+                    </a>
+                </div>
+
+                <!-- Allred Tech (General category) -->
+                <div class="resource-card" data-category="all">
+                    <h3><i class="fas fa-tools"></i> Allred Tech</h3>
+                    <p>Provides a variety of tech tools and resources, potentially including ID generators among its offerings.</p>
+                    <a href="https://www.allredtech.com/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Allred Tech
+                    </a>
+                </div>
+
+                <!-- Email Masking - Additional -->
+                <div class="resource-card" data-category="email-masking">
+                    <h3><i class="fas fa-at"></i> AnonAddy</h3>
+                    <p>Allows users to create anonymous email aliases, forwarding emails to their real inbox while keeping their identity hidden.</p>
+                    <a href="https://anonaddy.com/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit AnonAddy
+                    </a>
+                </div>
+
+                <!-- Cloud Communications -->
+                <div class="resource-card" data-category="cloud-comms">
+                    <h3><i class="fab fa-aws"></i> Amazon SNS</h3>
+                    <p>A flexible, fully managed pub/sub messaging and mobile notifications service for coordinating the delivery of messages to subscribing endpoints and clients, beneficial for automated notifications in OSINT operations.</p>
+                    <a href="https://aws.amazon.com/sns/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Amazon SNS
+                    </a>
+                </div>
+
+                <div class="resource-card" data-category="cloud-comms">
+                    <h3><i class="fas fa-phone-square"></i> Twilio</h3>
+                    <p>Offers a cloud communications platform for making and receiving calls and texts, enabling the creation of disposable numbers for secure communications.</p>
+                    <a href="https://www.twilio.com/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Twilio
+                    </a>
+                </div>
+
+                <!-- Anonymous Messaging -->
+                <div class="resource-card" data-category="messaging">
+                    <h3><i class="fas fa-sms"></i> Globfone</h3>
+                    <p>A free service for sending text messages globally without using a personal phone number, useful for anonymous communication.</p>
+                    <a href="https://globfone.com/send-text/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit Globfone
+                    </a>
+                </div>
+
+                <div class="resource-card" data-category="messaging">
+                    <h3><i class="fas fa-paper-plane"></i> SendAText</h3>
+                    <p>Enables users to send free text messages online to various countries, a handy tool for anonymous communication.</p>
+                    <a href="https://www.sendatext.co/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit SendAText
+                    </a>
+                </div>
+
+                <div class="resource-card" data-category="messaging">
+                    <h3><i class="fas fa-fax"></i> FaxZero</h3>
+                    <p>Allows sending free faxes online, suitable for sending documents anonymously or without a fax machine.</p>
+                    <a href="https://faxzero.com/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Visit FaxZero
+                    </a>
+                </div>
+            </div>
+            
+            <div class="stats">
+                <div>Total Resources: <span id="resourceCount">200+</span></div>
+                <div>Last Updated: <span id="lastUpdated">October 2023</span></div>
             </div>
         </div>
     </div>
 
     <script>
-        const menuBtn = document.getElementById('menuBtn');
-        const categoryBar = document.getElementById('categoryBar');
-        const overlay = document.getElementById('overlay');
+        // DOM Elements
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const sidebar = document.getElementById('sidebar');
+        const mobileOverlay = document.getElementById('mobileOverlay');
         const categoryItems = document.querySelectorAll('.category-item');
         const resourcesGrid = document.getElementById('resourcesGrid');
         const categoryTitle = document.getElementById('categoryTitle');
         const categorySearch = document.getElementById('categorySearch');
         const themeToggle = document.getElementById('themeToggle');
+        const resourceCount = document.getElementById('resourceCount');
+
+        // Initialize resource count
+        resourceCount.textContent = document.querySelectorAll('.resource-card').length;
 
         // Cookie functions
         function setCookie(name, value, days) {
@@ -899,10 +1727,10 @@
         themeToggle.addEventListener('click', () => {
             document.body.classList.toggle('dark-mode');
             if (document.body.classList.contains('dark-mode')) {
-                themeToggle.textContent = '☀️';
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
                 setCookie('theme', 'dark', 365);
             } else {
-                themeToggle.textContent = '🌙';
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
                 setCookie('theme', 'light', 365);
             }
         });
@@ -911,17 +1739,18 @@
         const savedTheme = getCookie('theme');
         if (savedTheme === 'dark') {
             document.body.classList.add('dark-mode');
-            themeToggle.textContent = '☀️';
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
         }
 
-        menuBtn.addEventListener('click', () => {
-            categoryBar.classList.toggle('active');
-            overlay.classList.toggle('active');
+        // Mobile menu functionality
+        mobileMenuBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
         });
 
-        overlay.addEventListener('click', () => {
-            categoryBar.classList.remove('active');
-            overlay.classList.remove('active');
+        mobileOverlay.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+            mobileOverlay.classList.remove('active');
         });
 
         // Category search functionality
@@ -938,32 +1767,43 @@
             });
         });
 
+        // Category filtering
         categoryItems.forEach(item => {
             item.addEventListener('click', () => {
                 const category = item.dataset.category;
                 filterResources(category);
                 
                 // Update title
-                categoryTitle.textContent = category === 'all' ? 
-                    'All Privacy Resources' : 
-                    item.textContent + ' Resources';
+                if (category === 'all') {
+                    categoryTitle.innerHTML = '<i class="fas fa-th-large"></i> All Privacy Resources';
+                } else {
+                    const icon = item.querySelector('i').cloneNode(true);
+                    categoryTitle.innerHTML = '';
+                    categoryTitle.appendChild(icon);
+                    categoryTitle.appendChild(document.createTextNode(' ' + item.textContent + ' Resources'));
+                }
                 
-                // Close sidebar
-                categoryBar.classList.remove('active');
-                overlay.classList.remove('active');
+                // Close mobile sidebar if open
+                sidebar.classList.remove('active');
+                mobileOverlay.classList.remove('active');
             });
         });
 
         function filterResources(category) {
             const cards = document.querySelectorAll('.resource-card');
+            let visibleCount = 0;
             
             cards.forEach(card => {
                 if (category === 'all' || card.dataset.category === category) {
                     card.style.display = 'block';
+                    visibleCount++;
                 } else {
                     card.style.display = 'none';
                 }
             });
+            
+            // Update resource count
+            resourceCount.textContent = visibleCount;
         }
     </script>
 </body>
